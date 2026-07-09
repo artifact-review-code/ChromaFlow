@@ -1,0 +1,15 @@
+tile_size: 224
+tile_overlap: 64
+tile_batch_size: 16
+cellprob_mode: logits
+cellprob_threshold: 0.0
+flow_threshold: 0.0
+min_size: 15
+flow_scale: 70.0
+niter: 30
+seed_threshold: 0.4
+seed_min_distance: 8
+fg_thresh: 0.5
+variant: S4_drop
+tta: hflip,vflip
+mask_dilation: 1
