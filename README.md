@@ -4,28 +4,11 @@
 
 ChromaFlow learns nuclear extent and instance separation from one point per nucleus. It augments fixed point-derived cluster supervision with two analytic priors: **Divergence-Sink Flow (DSF)** for point-conditioned instance assignment and **Chromatic Anchor Regularization (CAR)** for stain-supported nuclear extent.
 
-![ChromaFlow architecture](assets/paper/figure2_architecture.png)
+## Network architecture
 
-## At a glance
+![ChromaFlow network architecture](assets/paper/figure2_architecture.png)
 
-```mermaid
-flowchart LR
-    A["RGB H&E image"] --> B["ResNet-34 U-Net"]
-    P["One point per nucleus"] --> C["Static K-means + Voronoi labels"]
-    C --> L["Foreground and point losses"]
-    B --> F["Foreground head"]
-    B --> H["Centerness head"]
-    B --> V["Scalar potential head"]
-    V --> D["Negative gradient flow"]
-    P --> S["DSF sink targets"]
-    S --> D
-    A --> R["H&E stain concentrations"]
-    R --> K["CAR positive/negative anchors"]
-    F --> T["Tiled inference + flip TTA"]
-    H --> T
-    D --> T
-    T --> O["Instance masks"]
-```
+The shared ResNet-34 U-Net predicts foreground, centerness, and scalar potential. DSF turns the potential into sink-directed flow basins, while CAR constrains nuclear support using hematoxylin and eosin evidence. Centerness-guided basin refinement produces the final instance masks.
 
 The canonical path is deliberately small: `dataset.py` prepares the training tensors, `model.py` defines the three-head network, `losses.py` implements the training objective, `train.py` runs optimization, and `eval.py`/`decode_variants.py` perform tiled inference and instance decoding. See [Code structure](docs/CODE_STRUCTURE.md) and [Method guide](docs/METHOD.md).
 
