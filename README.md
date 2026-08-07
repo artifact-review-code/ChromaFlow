@@ -1,17 +1,50 @@
 # ChromaFlow
 
-Anonymous review release for point-supervised nuclei instance segmentation.
+**Anonymous artifact for point-supervised nuclei instance segmentation in H&E images.**
 
-ChromaFlow trains an image-only nuclei segmentation network from point annotations and stain-aware supervision. The public package contains model definitions, training losses, preprocessing utilities, full-image inference, decoding variants, and evaluation code. Datasets, checkpoints, logs, and external baseline repositories are intentionally excluded.
+ChromaFlow learns nuclear extent and instance separation from one point per nucleus. It augments fixed point-derived cluster supervision with two analytic priors: **Divergence-Sink Flow (DSF)** for point-conditioned instance assignment and **Chromatic Anchor Regularization (CAR)** for stain-supported nuclear extent.
 
-## Repository Layout
+![ChromaFlow architecture](assets/paper/figure2_architecture.png)
 
-```text
-chromaflow/          Core Python package
-configs/             Reference training and inference settings
-scripts/             Reproducible command-line entry points
-docs/                Data format and implementation details
+## At a glance
+
+```mermaid
+flowchart LR
+    A["RGB H&E image"] --> B["ResNet-34 U-Net"]
+    P["One point per nucleus"] --> C["Static K-means + Voronoi labels"]
+    C --> L["Foreground and point losses"]
+    B --> F["Foreground head"]
+    B --> H["Centerness head"]
+    B --> V["Scalar potential head"]
+    V --> D["Negative gradient flow"]
+    P --> S["DSF sink targets"]
+    S --> D
+    A --> R["H&E stain concentrations"]
+    R --> K["CAR positive/negative anchors"]
+    F --> T["Tiled inference + flip TTA"]
+    H --> T
+    D --> T
+    T --> O["Instance masks"]
 ```
+
+The canonical path is deliberately small: `dataset.py` prepares the training tensors, `model.py` defines the three-head network, `losses.py` implements the training objective, `train.py` runs optimization, and `eval.py`/`decode_variants.py` perform tiled inference and instance decoding. See [Code structure](docs/CODE_STRUCTURE.md) and [Method guide](docs/METHOD.md).
+
+## Review release contents
+
+Included:
+
+- canonical model, losses, training, preprocessing, tiled inference, and evaluation code;
+- exact split manifests and machine-readable paper result tables;
+- paper figures and four cropped reviewer examples with pre-generated predictions;
+- limited, real training commands and a documented inference interface.
+
+Not included during anonymous review:
+
+- pretrained ChromaFlow checkpoints;
+- complete third-party datasets;
+- external baseline repositories, their checkpoints, or private experiment logs.
+
+The example predictions below are pre-generated artifacts that document expected outputs. A checkpoint is required to run new predictions. Model weights will be released upon acceptance; see [Model zoo](docs/MODEL_ZOO.md).
 
 ## Installation
 
@@ -22,61 +55,64 @@ pip install -r requirements.txt
 pip install -e .
 ```
 
-The default ResNet-34 ChromaFlow path requires PyTorch, torchvision, NumPy, SciPy, scikit-image, Pillow, PyYAML, OpenCV, and Cellpose. `timm` is only needed for optional ViT/UNI/DINO encoder variants.
+The canonical ResNet-34 path requires PyTorch, torchvision, NumPy, SciPy, scikit-image, Pillow, PyYAML, OpenCV, and Cellpose. `timm` is only required by optional encoder experiments.
 
-## Data
+## Reviewer examples
 
-The training loader expects prepared patches under:
+| Dataset | Input | ChromaFlow instances | Boundary overlay |
+|---|---|---|---|
+| MoNuSeg | ![](assets/demo/MO/input.png) | ![](assets/demo/MO/prediction.png) | ![](assets/demo/MO/overlay.png) |
+| CPM-17 | ![](assets/demo/CPM/input.png) | ![](assets/demo/CPM/prediction.png) | ![](assets/demo/CPM/overlay.png) |
+| CoNIC | ![](assets/demo/CONIC/input.png) | ![](assets/demo/CONIC/prediction.png) | ![](assets/demo/CONIC/overlay.png) |
+| NuInsSeg | ![](assets/demo/NUINSSEG/input.png) | ![](assets/demo/NUINSSEG/prediction.png) | ![](assets/demo/NUINSSEG/overlay.png) |
 
-```text
-data/official_clean/
-  bonus_prepared/{MO,CPM}/images/{train,val,test}/*.png
-  bonus_prepared/{MO,CPM}/ratio2.0/labels_clu/{train,val,test}/*_label_clu.png
-  ours_prepared/{MO,CPM}/ratio2.0/pob_targets/{train,val,test}/*.npz
-  core/monuseg/...
-  core/cpm17/...
-```
+Red contours show predicted instance boundaries. The complete provenance, crop coordinates, and source links are in [`assets/demo/manifest.json`](assets/demo/manifest.json). These crops are examples, not a substitute for the source datasets.
 
-See `docs/DATA_FORMAT.md` for the exact fields.
+## Training and evaluation
 
-## Training
-
-Example MoNuSeg training:
-
-```bash
-bash scripts/train_mo.sh /path/to/project_or_data_root 0
-```
-
-Example CPM-17 training:
-
-```bash
-bash scripts/train_cpm.sh /path/to/project_or_data_root 0
-```
-
-The released commands train for 150 epochs, evaluate every 10 epochs, and select the final model using the best validation AJI checkpoint (`best_val_aji.pth`). Early stopping is disabled.
-
-## Inference And Evaluation
-
-Evaluate a checkpoint with the default full-image evaluator:
-
-```bash
-bash scripts/evaluate.sh /path/to/project_or_data_root MO test /path/to/checkpoint.pth
-```
-
-Run the seed-anchored S4 decoding variant with flip TTA:
-
-```bash
-bash scripts/decode_variants.sh /path/to/project_or_data_root MO test /path/to/checkpoint.pth
-```
-
-Outputs are written under `runs/` by default.
-
-## Preprocessing Utility
-
-To generate stain-aware Voronoi cluster labels from prepared point targets:
+Prepare static cluster labels, then train one seed:
 
 ```bash
 bash scripts/prepare_sav_labels.sh /path/to/project_or_data_root MO
+bash scripts/train_canonical_mo.sh /path/to/project_or_data_root 0
 ```
 
-This utility is optional for experiments that use the default `labels_clu` labels.
+Evaluate a user-provided checkpoint:
+
+```bash
+bash scripts/evaluate.sh \
+  /path/to/project_or_data_root MO test \
+  /path/to/best_val_aji.pth runs/eval_MO_test
+```
+
+The canonical run uses 150 epochs, 224x224 patches, batch size 16, Adam at `1e-4`, validation every 10 epochs, and best-validation-AJI checkpoint selection. See [Training protocol](docs/TRAINING.md), [Inference guide](docs/INFERENCE.md), and [Data format](docs/DATA_FORMAT.md).
+
+## Results and visualizations
+
+ChromaFlow obtains the highest AJI among weakly supervised methods in all four in-domain settings and seven of eight cross-dataset directions. The complete paper tables are available as [structured results](docs/RESULTS.md); visual comparisons, mechanism analyses, robustness, and failure cases are collected in [Visualizations](docs/VISUALIZATIONS.md).
+
+![In-domain qualitative comparison](assets/paper/figure3_indomain.png)
+
+## Documentation
+
+- [Method and workflow](docs/METHOD.md)
+- [Code structure](docs/CODE_STRUCTURE.md)
+- [Datasets, sources, and splits](docs/DATASETS.md)
+- [Training protocol](docs/TRAINING.md)
+- [Inference and output format](docs/INFERENCE.md)
+- [Paper result tables](docs/RESULTS.md)
+- [Visualizations](docs/VISUALIZATIONS.md)
+- [Model zoo and release status](docs/MODEL_ZOO.md)
+
+## Reproducibility checks
+
+```bash
+python tools/validate_release.py
+python tools/sync_results.py /path/to/final/manuscript.tex --check
+```
+
+The first command checks split counts/disjointness, result schemas, assets, links, and anonymous-release constraints. The second confirms that the committed CSV tables exactly match the final LaTeX manuscript.
+
+## License and data notice
+
+Repository code is provided for anonymous academic review. Dataset images retain their original licenses and terms; consult the source links in [Datasets](docs/DATASETS.md) before redistribution or downstream use. The four included crops are attributed research examples derived from the datasets used in the paper.

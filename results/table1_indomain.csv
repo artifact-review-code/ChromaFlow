@@ -1,0 +1,433 @@
+group,method,params_m,gflops,dataset,metric,value
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,AJI,0.597
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,Dice,0.763
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,DQ,0.747
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,SQ,0.721
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,PQ,0.540
+fully_supervised,U-Net,24.44,7.87,MoNuSeg,Recall,0.807
+fully_supervised,U-Net,24.44,7.87,CPM-17,AJI,0.527
+fully_supervised,U-Net,24.44,7.87,CPM-17,Dice,0.751
+fully_supervised,U-Net,24.44,7.87,CPM-17,DQ,0.695
+fully_supervised,U-Net,24.44,7.87,CPM-17,SQ,0.762
+fully_supervised,U-Net,24.44,7.87,CPM-17,PQ,0.530
+fully_supervised,U-Net,24.44,7.87,CPM-17,Recall,0.700
+fully_supervised,U-Net,24.44,7.87,CoNIC,AJI,0.545
+fully_supervised,U-Net,24.44,7.87,CoNIC,Dice,0.754
+fully_supervised,U-Net,24.44,7.87,CoNIC,DQ,0.720
+fully_supervised,U-Net,24.44,7.87,CoNIC,SQ,0.776
+fully_supervised,U-Net,24.44,7.87,CoNIC,PQ,0.567
+fully_supervised,U-Net,24.44,7.87,CoNIC,Recall,0.726
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,AJI,0.435
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,Dice,0.707
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,DQ,0.596
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,SQ,0.747
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,PQ,0.445
+fully_supervised,U-Net,24.44,7.87,NuInsSeg,Recall,0.553
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,AJI,0.638
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,Dice,0.804
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,DQ,0.833
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,SQ,0.766
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,PQ,0.638
+fully_supervised,HoVer-Net,45.03,162.01,MoNuSeg,Recall,0.847
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,AJI,0.751
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,Dice,0.878
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,DQ,0.899
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,SQ,0.828
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,PQ,0.746
+fully_supervised,HoVer-Net,45.03,162.01,CPM-17,Recall,0.910
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,AJI,0.404
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,Dice,0.715
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,DQ,0.637
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,SQ,0.804
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,PQ,0.519
+fully_supervised,HoVer-Net,45.03,162.01,CoNIC,Recall,0.550
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,AJI,0.508
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,Dice,0.742
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,DQ,0.657
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,SQ,0.735
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,PQ,0.489
+fully_supervised,HoVer-Net,45.03,162.01,NuInsSeg,Recall,0.656
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,AJI,0.366
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,Dice,0.599
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,DQ,0.620
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,SQ,0.764
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,PQ,0.474
+foundation_model,SAM ViT-H,641.09,2733.64,MoNuSeg,Recall,0.673
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,AJI,0.470
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,Dice,0.673
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,DQ,0.583
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,SQ,0.768
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,PQ,0.449
+foundation_model,SAM ViT-H,641.09,2733.64,CPM-17,Recall,0.818
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,AJI,0.317
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,Dice,0.510
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,DQ,0.480
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,SQ,0.749
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,PQ,0.371
+foundation_model,SAM ViT-H,641.09,2733.64,CoNIC,Recall,0.590
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,AJI,0.361
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,Dice,0.590
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,DQ,0.500
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,SQ,0.742
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,PQ,0.375
+foundation_model,SAM ViT-H,641.09,2733.64,NuInsSeg,Recall,0.510
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,AJI,0.657
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,Dice,0.816
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,DQ,0.871
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,SQ,0.771
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,PQ,0.672
+foundation_model,CellViT-SAM-H,699.74,5533.09,MoNuSeg,Recall,
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,AJI,0.609
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,Dice,0.815
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,DQ,0.827
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,SQ,0.811
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,PQ,0.671
+foundation_model,CellViT-SAM-H,699.74,5533.09,CPM-17,Recall,
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,AJI,0.341
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,Dice,0.636
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,DQ,0.550
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,SQ,0.727
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,PQ,0.411
+foundation_model,CellViT-SAM-H,699.74,5533.09,CoNIC,Recall,0.466
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,AJI,0.307
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,Dice,0.583
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,DQ,0.467
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,SQ,0.652
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,PQ,0.352
+foundation_model,CellViT-SAM-H,699.74,5533.09,NuInsSeg,Recall,0.380
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,AJI,0.274
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,Dice,0.485
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,DQ,0.431
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,SQ,0.665
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,PQ,0.295
+foundation_model,Cellpose 3,6.6,20.34,MoNuSeg,Recall,0.386
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,AJI,0.301
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,Dice,0.487
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,DQ,0.447
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,SQ,0.626
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,PQ,0.313
+foundation_model,Cellpose 3,6.6,20.34,CPM-17,Recall,0.424
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,AJI,0.154
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,Dice,0.331
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,DQ,0.224
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,SQ,0.558
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,PQ,0.150
+foundation_model,Cellpose 3,6.6,20.34,CoNIC,Recall,0.198
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,AJI,0.252
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,Dice,0.506
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,DQ,0.396
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,SQ,0.631
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,PQ,0.291
+foundation_model,Cellpose 3,6.6,20.34,NuInsSeg,Recall,0.330
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,AJI,0.025
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,Dice,0.296
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,DQ,0.229
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,SQ,0.792
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,PQ,0.180
+foundation_model,SAM 2.1,224.45,810.47,MoNuSeg,Recall,0.148
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,AJI,0.286
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,Dice,0.662
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,DQ,0.669
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,SQ,0.819
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,PQ,0.548
+foundation_model,SAM 2.1,224.45,810.47,CPM-17,Recall,0.600
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,AJI,0.096
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,Dice,0.374
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,DQ,0.377
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,SQ,0.756
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,PQ,0.296
+foundation_model,SAM 2.1,224.45,810.47,CoNIC,Recall,0.342
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,AJI,0.182
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,Dice,0.535
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,DQ,0.439
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,SQ,0.717
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,PQ,0.337
+foundation_model,SAM 2.1,224.45,810.47,NuInsSeg,Recall,0.350
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,AJI,0.416
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,Dice,0.712
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,DQ,0.713
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,SQ,0.758
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,PQ,0.541
+foundation_model,PathoSAM,93.74,486.42,MoNuSeg,Recall,0.713
+foundation_model,PathoSAM,93.74,486.42,CPM-17,AJI,0.632
+foundation_model,PathoSAM,93.74,486.42,CPM-17,Dice,0.807
+foundation_model,PathoSAM,93.74,486.42,CPM-17,DQ,0.728
+foundation_model,PathoSAM,93.74,486.42,CPM-17,SQ,0.799
+foundation_model,PathoSAM,93.74,486.42,CPM-17,PQ,0.583
+foundation_model,PathoSAM,93.74,486.42,CPM-17,Recall,0.891
+foundation_model,PathoSAM,93.74,486.42,CoNIC,AJI,0.455
+foundation_model,PathoSAM,93.74,486.42,CoNIC,Dice,0.663
+foundation_model,PathoSAM,93.74,486.42,CoNIC,DQ,0.480
+foundation_model,PathoSAM,93.74,486.42,CoNIC,SQ,0.752
+foundation_model,PathoSAM,93.74,486.42,CoNIC,PQ,0.373
+foundation_model,PathoSAM,93.74,486.42,CoNIC,Recall,0.808
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,AJI,0.397
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,Dice,0.636
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,DQ,0.417
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,SQ,0.710
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,PQ,0.299
+foundation_model,PathoSAM,93.74,486.42,NuInsSeg,Recall,0.595
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,AJI,0.578
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,Dice,0.747
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,DQ,0.740
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,SQ,0.713
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,PQ,0.529
+weakly_supervised,Qu,24.91,7.81,MoNuSeg,Recall,0.808
+weakly_supervised,Qu,24.91,7.81,CPM-17,AJI,0.489
+weakly_supervised,Qu,24.91,7.81,CPM-17,Dice,0.677
+weakly_supervised,Qu,24.91,7.81,CPM-17,DQ,0.605
+weakly_supervised,Qu,24.91,7.81,CPM-17,SQ,0.651
+weakly_supervised,Qu,24.91,7.81,CPM-17,PQ,0.402
+weakly_supervised,Qu,24.91,7.81,CPM-17,Recall,0.607
+weakly_supervised,Qu,24.91,7.81,CoNIC,AJI,0.446
+weakly_supervised,Qu,24.91,7.81,CoNIC,Dice,0.635
+weakly_supervised,Qu,24.91,7.81,CoNIC,DQ,0.543
+weakly_supervised,Qu,24.91,7.81,CoNIC,SQ,0.672
+weakly_supervised,Qu,24.91,7.81,CoNIC,PQ,0.375
+weakly_supervised,Qu,24.91,7.81,CoNIC,Recall,0.611
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,AJI,0.353
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,Dice,0.587
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,DQ,0.356
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,SQ,0.637
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,PQ,0.234
+weakly_supervised,Qu,24.91,7.81,NuInsSeg,Recall,0.390
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,AJI,0.458
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,Dice,0.640
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,DQ,0.349
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,SQ,0.654
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,PQ,0.229
+weakly_supervised,Scribble2Label,32.52,10.68,MoNuSeg,Recall,0.588
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,AJI,0.452
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,Dice,0.640
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,DQ,0.416
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,SQ,0.665
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,PQ,0.279
+weakly_supervised,Scribble2Label,32.52,10.68,CPM-17,Recall,0.557
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,AJI,0.345
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,Dice,0.574
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,DQ,0.479
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,SQ,0.653
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,PQ,0.324
+weakly_supervised,Scribble2Label,32.52,10.68,CoNIC,Recall,0.522
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,AJI,0.248
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,Dice,0.444
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,DQ,0.110
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,SQ,0.538
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,PQ,0.067
+weakly_supervised,Scribble2Label,32.52,10.68,NuInsSeg,Recall,0.281
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,AJI,0.539
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,Dice,0.718
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,DQ,0.600
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,SQ,0.707
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,PQ,0.425
+weakly_supervised,SPN+IEN,24.93,8.14,MoNuSeg,Recall,0.828
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,AJI,0.528
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,Dice,0.706
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,DQ,0.669
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,SQ,0.694
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,PQ,0.469
+weakly_supervised,SPN+IEN,24.93,8.14,CPM-17,Recall,0.705
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,AJI,0.328
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,Dice,0.569
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,DQ,0.348
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,SQ,0.639
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,PQ,0.239
+weakly_supervised,SPN+IEN,24.93,8.14,CoNIC,Recall,0.342
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,AJI,0.384
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,Dice,0.618
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,DQ,0.406
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,SQ,0.649
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,PQ,0.268
+weakly_supervised,SPN+IEN,24.93,8.14,NuInsSeg,Recall,0.439
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,AJI,0.566
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,Dice,0.743
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,DQ,0.750
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,SQ,0.697
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,PQ,0.524
+weakly_supervised,SC-Net,81.23,95.52,MoNuSeg,Recall,0.777
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,AJI,0.427
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,Dice,0.643
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,DQ,0.547
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,SQ,0.651
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,PQ,0.364
+weakly_supervised,SC-Net,81.23,95.52,CPM-17,Recall,0.510
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,AJI,0.421
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,Dice,0.627
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,DQ,0.529
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,SQ,0.671
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,PQ,0.367
+weakly_supervised,SC-Net,81.23,95.52,CoNIC,Recall,0.546
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,AJI,0.310
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,Dice,0.557
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,DQ,0.331
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,SQ,0.641
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,PQ,0.219
+weakly_supervised,SC-Net,81.23,95.52,NuInsSeg,Recall,0.328
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,AJI,0.555
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,Dice,0.739
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,DQ,0.668
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,SQ,0.719
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,PQ,0.482
+weakly_supervised,SAC-Net,11.70,14.51,MoNuSeg,Recall,0.788
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,AJI,0.536
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,Dice,0.733
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,DQ,0.613
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,SQ,0.729
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,PQ,0.451
+weakly_supervised,SAC-Net,11.70,14.51,CPM-17,Recall,0.706
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,AJI,0.388
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,Dice,0.601
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,DQ,0.458
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,SQ,0.630
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,PQ,0.304
+weakly_supervised,SAC-Net,11.70,14.51,CoNIC,Recall,0.487
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,AJI,0.303
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,Dice,0.503
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,DQ,0.241
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,SQ,0.585
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,PQ,0.151
+weakly_supervised,SAC-Net,11.70,14.51,NuInsSeg,Recall,0.262
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,AJI,0.601
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,Dice,0.762
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,DQ,0.771
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,SQ,0.726
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,PQ,0.560
+weakly_supervised,BoNuS,28.03,10.82,MoNuSeg,Recall,0.848
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,AJI,0.538
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,Dice,0.737
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,DQ,0.712
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,SQ,0.731
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,PQ,0.524
+weakly_supervised,BoNuS,28.03,10.82,CPM-17,Recall,0.672
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,AJI,0.356
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,Dice,0.583
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,DQ,0.419
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,SQ,0.635
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,PQ,0.277
+weakly_supervised,BoNuS,28.03,10.82,CoNIC,Recall,0.411
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,AJI,0.242
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,Dice,0.451
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,DQ,0.202
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,SQ,0.516
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,PQ,0.126
+weakly_supervised,BoNuS,28.03,10.82,NuInsSeg,Recall,0.192
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,AJI,0.485
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,Dice,0.660
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,DQ,0.652
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,SQ,0.645
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,PQ,0.422
+weakly_supervised,WNS-PLCUD,24.04,10.13,MoNuSeg,Recall,0.736
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,AJI,0.480
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,Dice,0.673
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,DQ,0.639
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,SQ,0.646
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,PQ,0.416
+weakly_supervised,WNS-PLCUD,24.04,10.13,CPM-17,Recall,0.673
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,AJI,0.398
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,Dice,0.631
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,DQ,0.515
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,SQ,0.628
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,PQ,0.334
+weakly_supervised,WNS-PLCUD,24.04,10.13,CoNIC,Recall,0.537
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,AJI,0.339
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,Dice,0.580
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,DQ,0.417
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,SQ,0.651
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,PQ,0.272
+weakly_supervised,WNS-PLCUD,24.04,10.13,NuInsSeg,Recall,0.459
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,AJI,0.356
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,Dice,0.581
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,DQ,0.382
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,SQ,0.626
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,PQ,0.241
+weakly_supervised,DENSE,144.53,226.67,MoNuSeg,Recall,0.407
+weakly_supervised,DENSE,144.53,226.67,CPM-17,AJI,0.334
+weakly_supervised,DENSE,144.53,226.67,CPM-17,Dice,0.587
+weakly_supervised,DENSE,144.53,226.67,CPM-17,DQ,0.393
+weakly_supervised,DENSE,144.53,226.67,CPM-17,SQ,0.631
+weakly_supervised,DENSE,144.53,226.67,CPM-17,PQ,0.252
+weakly_supervised,DENSE,144.53,226.67,CPM-17,Recall,0.349
+weakly_supervised,DENSE,144.53,226.67,CoNIC,AJI,0.128
+weakly_supervised,DENSE,144.53,226.67,CoNIC,Dice,0.352
+weakly_supervised,DENSE,144.53,226.67,CoNIC,DQ,0.069
+weakly_supervised,DENSE,144.53,226.67,CoNIC,SQ,0.499
+weakly_supervised,DENSE,144.53,226.67,CoNIC,PQ,0.043
+weakly_supervised,DENSE,144.53,226.67,CoNIC,Recall,0.063
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,AJI,0.198
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,Dice,0.460
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,DQ,0.280
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,SQ,0.627
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,PQ,0.185
+weakly_supervised,DENSE,144.53,226.67,NuInsSeg,Recall,0.219
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,AJI,0.573
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,Dice,0.741
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,DQ,0.736
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,SQ,0.711
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,PQ,0.524
+weakly_supervised,SAPL,25.69,11.63,MoNuSeg,Recall,0.836
+weakly_supervised,SAPL,25.69,11.63,CPM-17,AJI,0.529
+weakly_supervised,SAPL,25.69,11.63,CPM-17,Dice,0.723
+weakly_supervised,SAPL,25.69,11.63,CPM-17,DQ,0.688
+weakly_supervised,SAPL,25.69,11.63,CPM-17,SQ,0.704
+weakly_supervised,SAPL,25.69,11.63,CPM-17,PQ,0.487
+weakly_supervised,SAPL,25.69,11.63,CPM-17,Recall,0.685
+weakly_supervised,SAPL,25.69,11.63,CoNIC,AJI,0.381
+weakly_supervised,SAPL,25.69,11.63,CoNIC,Dice,0.628
+weakly_supervised,SAPL,25.69,11.63,CoNIC,DQ,0.533
+weakly_supervised,SAPL,25.69,11.63,CoNIC,SQ,0.677
+weakly_supervised,SAPL,25.69,11.63,CoNIC,PQ,0.366
+weakly_supervised,SAPL,25.69,11.63,CoNIC,Recall,0.524
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,AJI,0.223
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,Dice,0.443
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,DQ,0.205
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,SQ,0.551
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,PQ,0.131
+weakly_supervised,SAPL,25.69,11.63,NuInsSeg,Recall,0.211
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,AJI,0.444
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,Dice,0.686
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,DQ,0.639
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,SQ,0.702
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,PQ,0.450
+weakly_supervised,PPLO,127.85,84.59,MoNuSeg,Recall,0.605
+weakly_supervised,PPLO,127.85,84.59,CPM-17,AJI,0.440
+weakly_supervised,PPLO,127.85,84.59,CPM-17,Dice,0.690
+weakly_supervised,PPLO,127.85,84.59,CPM-17,DQ,0.622
+weakly_supervised,PPLO,127.85,84.59,CPM-17,SQ,0.700
+weakly_supervised,PPLO,127.85,84.59,CPM-17,PQ,0.439
+weakly_supervised,PPLO,127.85,84.59,CPM-17,Recall,0.557
+weakly_supervised,PPLO,127.85,84.59,CoNIC,AJI,0.213
+weakly_supervised,PPLO,127.85,84.59,CoNIC,Dice,0.458
+weakly_supervised,PPLO,127.85,84.59,CoNIC,DQ,0.323
+weakly_supervised,PPLO,127.85,84.59,CoNIC,SQ,0.639
+weakly_supervised,PPLO,127.85,84.59,CoNIC,PQ,0.228
+weakly_supervised,PPLO,127.85,84.59,CoNIC,Recall,0.276
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,AJI,0.221
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,Dice,0.478
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,DQ,0.266
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,SQ,0.576
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,PQ,0.180
+weakly_supervised,PPLO,127.85,84.59,NuInsSeg,Recall,0.222
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,AJI,0.621
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,Dice,0.781
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,DQ,0.823
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,SQ,0.731
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,PQ,0.602
+weakly_supervised,ChromaFlow,24.95,8.43,MoNuSeg,Recall,0.884
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,AJI,0.596
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,Dice,0.783
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,DQ,0.815
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,SQ,0.743
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,PQ,0.616
+weakly_supervised,ChromaFlow,24.95,8.43,CPM-17,Recall,0.799
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,AJI,0.449
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,Dice,0.659
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,DQ,0.595
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,SQ,0.679
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,PQ,0.416
+weakly_supervised,ChromaFlow,24.95,8.43,CoNIC,Recall,0.604
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,AJI,0.385
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,Dice,0.585
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,DQ,0.366
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,SQ,0.624
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,PQ,0.237
+weakly_supervised,ChromaFlow,24.95,8.43,NuInsSeg,Recall,0.415
