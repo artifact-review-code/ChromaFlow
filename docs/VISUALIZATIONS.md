@@ -1,55 +1,39 @@
-# Visualizations
+# Current manuscript figures
 
-## Method overview — paper Figures 1 and 2
+Figure numbering and assets follow the 2026-10-21 manuscript.
 
-![Method overview](../assets/paper/figure1_overview.png)
+## Figure 1: Overview
 
-The overview contrasts point-only supervision with the instance structure recovered by ChromaFlow. Colors denote instance assignments; arrows represent the learned sink-directed flow.
+![Overview](../assets/paper/figure1_overview.png)
 
-![Architecture and objectives](../assets/paper/figure2_architecture.png)
+## Figure 2: Architecture
 
-The architecture view links the shared ResNet-34 U-Net features to foreground, centerness, and potential heads. DSF regularizes grouping around point sinks, while CAR anchors nuclear extent using H&E evidence.
+![Architecture](../assets/paper/figure2_architecture.png)
 
-## In-domain comparison — paper Figure 3
+## Figure 3: In-domain comparison
 
 ![In-domain comparison](../assets/paper/figure3_indomain.png)
 
-Rows cover the four evaluation datasets and columns compare representative methods. Colored regions are predicted instances and contours expose merges, splits, and missed nuclei. The [original PDF](../assets/paper/figure3_indomain.pdf) is available for zooming.
+## Figure 4: Parameter sensitivity
 
-## Cross-domain comparison — paper Figure 4
+![Parameter sensitivity](../assets/paper/figure4_sensitivity.png)
 
-![Cross-domain comparison](../assets/paper/figure4_crossdomain.png)
+## Figure 5: Cross-domain comparison
 
-This figure visualizes all eight source-to-target directions. It highlights the effect of stain and morphology shifts when the target domain is not used for training or selection. The [original PDF](../assets/paper/figure4_crossdomain.pdf) is also included.
+![Cross-domain comparison](../assets/paper/figure5_crossdomain.png)
 
-## Sensitivity — paper Figure 5
+## Figure 6: Mechanism diagnostics
 
-![Sensitivity analysis](../assets/paper/figure5_sensitivity.png)
+![Mechanism diagnostics](../assets/paper/figure6_mechanisms.png)
 
-Curves report sensitivity to the principal DSF/CAR and decoding settings. The operating point used in the main experiments is fixed from source-domain validation. A vector-quality [PDF](../assets/paper/figure5_sensitivity.pdf) is provided.
+## Figure 7: Point budget and nuclear density
 
-## Mechanism ablations — paper Figure 6
+![Point budget and nuclear density](../assets/paper/figure7_annotation_efficiency.png)
 
-![Mechanism ablations](../assets/paper/figure6_mechanisms.png)
+## Figure 8: Stain and point robustness
 
-These panels isolate the effects of DSF and CAR. DSF primarily improves the separation and assignment of neighboring nuclei; CAR improves the foreground support in chromatically plausible regions.
+![Stain and point robustness](../assets/paper/figure8_robustness.png)
 
-## Robustness — paper Figure 7
+## Figure 9: Failure cases
 
-![Robustness](../assets/paper/figure7_robustness.png)
-
-Robustness experiments perturb supervision and image appearance. The comparison shows how analytic structural and stain priors stabilize predictions under imperfect point annotations and domain variation.
-
-## Failure cases — paper Figure 8
-
-![Failure cases](../assets/paper/figure8_failures.png)
-
-The selected failures expose remaining ambiguity in densely overlapping nuclei, weak hematoxylin response, and unusual morphology. They should be read as known limitations rather than cherry-picked successful examples.
-
-## Annotation efficiency — paper Figure 9
-
-![Annotation efficiency](../assets/paper/figure9_annotation_efficiency.png)
-
-This analysis relates performance to point-annotation effort. It motivates the point-supervised setting while retaining fully supervised methods as an upper-context comparison rather than an equal annotation-budget baseline.
-
-The four compact input/prediction/overlay examples used on the repository front page are documented separately in the [demo manifest](../assets/demo/manifest.json).
+![Failure cases](../assets/paper/figure9_failures.png)

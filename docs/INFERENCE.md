@@ -2,7 +2,7 @@
 
 ## Release status
 
-The inference implementation and pre-generated reviewer examples are included. **No ChromaFlow checkpoint is distributed during anonymous review**, so a user-provided compatible checkpoint is required for a new image. Planned weights are listed in the [Model zoo](MODEL_ZOO.md).
+The inference implementation is included. **No ChromaFlow checkpoint is distributed during anonymous review**, so a user-provided compatible checkpoint is required for a new image. Planned weights are listed in the [Model zoo](MODEL_ZOO.md).
 
 ## Accepted input and produced output
 
@@ -11,7 +11,6 @@ The inference implementation and pre-generated reviewer examples are included. *
 - Reviewer-friendly output: deterministic colored-instance PNG and a red boundary overlay.
 - Optional diagnostics: foreground probability/logits, centerness, and two-channel flow.
 
-The included examples follow this contract; each example folder contains `input.png`, `instances.npy`, `prediction.png`, and `overlay.png`.
 
 ## Paper evaluation command
 
@@ -23,7 +22,7 @@ bash scripts/decode_variants.sh \
   <PATH_TO_CHECKPOINT> runs/decode_MO_test
 ```
 
-The lower-level evaluator is useful when only the canonical Cellpose-style decoder is needed:
+The evaluator uses the same paper decoder for source validation and final testing:
 
 ```bash
 python -m chromaflow.eval \
@@ -72,7 +71,8 @@ config = {
     "cellprob_threshold": 0.0,
     "flow_threshold": 0.0,
     "min_size": 15,
-    "use_centerness_seeds": True,
+    "postprocess": "paper",
+    "mask_dilation": 1,
     "seed_threshold": 0.4,
     "seed_min_distance": 8,
 }
@@ -83,4 +83,4 @@ instances = predict_instance_map(
 np.save("instances.npy", instances.astype(np.int32))
 ```
 
-Do not substitute a random checkpoint: it produces meaningless masks and is not representative of the paper. The files under `assets/demo/` are explicitly pre-generated predictions from the paper experiments, with sample IDs and crop coordinates in the [demo manifest](../assets/demo/manifest.json).
+Use a compatible trained checkpoint as described in the model zoo.

@@ -46,6 +46,11 @@ DEFAULT_INFERENCE_CONFIG = {
     "tile_overlap": 64,
     "tile_batch_size": 16,
     "stitch_mode": "blend",
+    "postprocess": "paper",
+    "tta": "hflip,vflip",
+    "seed_threshold": 0.4,
+    "seed_min_distance": 8,
+    "mask_dilation": 1,
 }
 
 
@@ -85,11 +90,13 @@ def aji_fast(gt: np.ndarray, pred: np.ndarray) -> float:
     union = true_areas[:, None] + pred_areas[None, :] - inter
     iou = np.divide(inter, union, out=np.zeros_like(inter, dtype=np.float64), where=union > 0)
     paired_pred = np.argmax(iou, axis=1)
-    numerator = int(inter[np.arange(len(true_ids)), paired_pred].sum())
-    denominator = int(union[np.arange(len(true_ids)), paired_pred].sum())
-    used_pred = np.zeros(len(pred_ids), dtype=bool)
-    used_pred[paired_pred] = True
-    denominator += int(pred_areas[~used_pred].sum())
+    paired_true = np.flatnonzero(iou.max(axis=1) > 0)
+    paired_pred = paired_pred[paired_true]
+    numerator = int(inter[paired_true, paired_pred].sum())
+    denominator = int(union[paired_true, paired_pred].sum())
+    used_true = np.zeros(len(true_ids), dtype=bool); used_true[paired_true] = True
+    used_pred = np.zeros(len(pred_ids), dtype=bool); used_pred[paired_pred] = True
+    denominator += int(true_areas[~used_true].sum() + pred_areas[~used_pred].sum())
     return float(numerator / denominator) if denominator > 0 else 0.0
 
 
@@ -214,66 +221,16 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, float | int]:
 
 
 def load_eval_items(root: Path, dataset: str, split: str) -> list[EvalItem]:
+    from chromaflow.protocol import load_splits, dataset_base
     dataset = dataset.upper()
-    if dataset == "MO":
-        split_json = root / "data/official_clean/core/monuseg/splits/bonus_official_ids.json"
-        names = json.loads(split_json.read_text())[split]
-        return [
-            EvalItem(
-                name=name,
-                image_path=root / "data/official_clean/core/monuseg/images" / f"{name}.png",
-                label_path=root / "data/official_clean/core/monuseg/labels_instance" / f"{name}.npy",
-            )
-            for name in names
-        ]
-    if dataset == "CPM":
-        if split == "test":
-            split_json = root / "data/official_clean/core/cpm17/splits/bonus_official_arranged_ids.json"
-            mapping = json.loads((root / "data/official_clean/core/cpm17/mappings/bonus_arranged_to_official_train.json").read_text())
-            names = json.loads(split_json.read_text())["test"]
-            official = [(name, mapping[name]) for name in names]
-        elif split == "val":
-            official = [(f"test_image_{i:02d}", f"test_image_{i:02d}") for i in range(8)]
-        elif split == "extra_test":
-            official = [(f"test_image_{i:02d}", f"test_image_{i:02d}") for i in range(8, 32)]
-        else:
-            split_json = root / "data/official_clean/core/cpm17/splits/bonus_official_mapped_to_official_train.json"
-            names = json.loads(split_json.read_text())[split]
-            official = [(name, name) for name in names]
-        return [
-            EvalItem(
-                name=name,
-                image_path=root / "data/official_clean/core/cpm17/images" / f"{official_name}.png",
-                label_path=root / "data/official_clean/core/cpm17/labels_instance" / f"{official_name}.npy",
-            )
-            for name, official_name in official
-        ]
-    if dataset == "CONIC":
-        # CoNIC stratified subset: 5 sources × 50 patches (matches bonus_full_eval.py).
-        import random as _rnd
-        img_dir = root / "data/CoNIC/raw/images"
-        lab_dir = root / "data/CoNIC/raw/labels"
-        rng = _rnd.Random(0)
-        by_source: dict[str, list[Path]] = {}
-        for p in sorted(img_dir.glob("*.png")):
-            src = p.stem.split("_")[0]
-            by_source.setdefault(src, []).append(p)
-        items: list[EvalItem] = []
-        for src, paths in sorted(by_source.items()):
-            rng.shuffle(paths)
-            for p in paths[:50]:
-                lp = lab_dir / f"{p.stem}.npy"
-                if lp.exists():
-                    items.append(EvalItem(name=f"{src}/{p.stem}", image_path=p, label_path=lp))
-        return items
-    if dataset == "NUINSSEG":
-        base = root / "data/official_clean/nuinsseg_prepared"
-        names = json.loads((base / "splits.json").read_text())["test"]
-        return [
-            EvalItem(name=n, image_path=base / "images" / (n + ".png"), label_path=base / "labels_instance" / (n + ".npy"))
-            for n in names
-        ]
-    raise ValueError(f"Unsupported dataset: {dataset}")
+    manifest, _ = load_splits(root, dataset)
+    base = dataset_base(root, dataset)
+    items = [EvalItem(name=n, image_path=base / 'images' / (n+'.png'),
+                      label_path=base / 'labels_instance' / (n+'.npy')) for n in manifest[split]]
+    for item in items:
+        if not item.image_path.is_file() or not item.label_path.is_file():
+            raise FileNotFoundError(f'Missing evaluation image/label for {item.name}')
+    return items
 
 
 def crop_or_pad_to_shape(arr: np.ndarray, shape: tuple[int, int]) -> np.ndarray:
@@ -630,6 +587,12 @@ def predict_instance_map(
     seed_thr = float(inference_config.get("seed_threshold", 0.4))
     seed_md = int(inference_config.get("seed_min_distance", 8))
     postprocess = str(inference_config.get("postprocess", "cellpose"))
+    if postprocess == "paper":
+        from chromaflow.decode_variants import decode_S4
+        from skimage.segmentation import expand_labels
+        cfg = {**DEFAULT_INFERENCE_CONFIG, **inference_config, "device": device}
+        masks = decode_S4(fg_logits, flow, center_logits, cfg, drop_zero_peak=True)
+        return expand_labels(masks, distance=int(cfg['mask_dilation'])).astype(np.int32)
     if postprocess == "cellpose":
         d_p = flow[[1, 0]] * float(inference_config["flow_scale"])
         result = dynamics.compute_masks(
@@ -728,6 +691,9 @@ def evaluate_model(
     device = torch.device(device or ("cuda" if torch.cuda.is_available() else "cpu"))
     model.to(device)
     model.eval()
+    from chromaflow.tta import TTAModelWrapper, parse_modes
+    if inference_config.get('tta') and not isinstance(model, TTAModelWrapper):
+        model = TTAModelWrapper(model, modes=parse_modes(inference_config['tta']))
     items = load_eval_items(root, dataset, split)
     if limit:
         items = items[:limit]
@@ -825,7 +791,7 @@ def load_checkpoint(path: Path, device: torch.device) -> dict[str, Any]:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
-    parser.add_argument("--dataset", choices=["MO", "CPM"], required=True)
+    parser.add_argument("--dataset", choices=["MO", "CPM", "CONIC", "NUINSSEG"], required=True)
     parser.add_argument("--split", nargs="+", default=["val", "test"])
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--out-dir", required=True)
@@ -837,7 +803,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--flow-threshold", type=float, default=0.0)
     parser.add_argument("--min-size", type=int, default=15)
     parser.add_argument("--center-alpha", type=float, default=0.0)
-    parser.add_argument("--postprocess", choices=["cellpose", "cc", "hybrid"], default="cellpose",
+    parser.add_argument("--postprocess", choices=["paper", "cellpose", "cc", "hybrid"], default="paper",
                         help="cc=connected components on fg only; hybrid=cc + cellpose flow split for big CCs")
     parser.add_argument("--cc-min-size", type=int, default=15)
     parser.add_argument("--cc-touching-size", type=int, default=400, help="CC larger than this is considered touching, run flow split")
@@ -848,7 +814,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--tile-size", type=int, default=224)
     parser.add_argument("--tile-overlap", type=int, default=64)
     parser.add_argument("--tile-batch-size", type=int, default=16)
-    parser.add_argument("--tta", type=str, default="",
+    parser.add_argument("--tta", type=str, default="hflip,vflip",
                         help="TTA modes, comma-separated: hflip,vflip,hvflip. Empty disables.")
     parser.add_argument("--stitch-mode", choices=["hard_replace", "blend"], default="blend",
                         help="blend=cosine-half ramp blending (default, recommended); hard_replace=legacy seam (kept for reproducing pre-2026-05-16 numbers)")
@@ -999,6 +965,7 @@ def main() -> None:
         "tile_batch_size": args.tile_batch_size,
         "center_alpha": args.center_alpha,
         "postprocess": args.postprocess,
+        "tta": args.tta,
         "cc_min_size": args.cc_min_size,
         "cc_touching_size": args.cc_touching_size,
         "use_centerness_seeds": args.use_centerness_seeds,

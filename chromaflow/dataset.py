@@ -101,7 +101,7 @@ def stain_h_channel(image: np.ndarray) -> np.ndarray:
     lo, hi = np.percentile(h_channel, [1.0, 99.0])
     if hi <= lo + 1e-6:
         return np.zeros(h_channel.shape, dtype=np.float32)
-    h_channel = (h_channel - lo) / (hi - lo)
+    h_channel = (h_channel - lo) / (hi - lo + 1e-6)
     return np.clip(h_channel, 0.0, 1.0).astype(np.float32)
 
 
@@ -121,7 +121,7 @@ def stain_e_channel(image: np.ndarray) -> np.ndarray:
     lo, hi = np.percentile(e_channel, [1.0, 99.0])
     if hi <= lo + 1e-6:
         return np.zeros(e_channel.shape, dtype=np.float32)
-    e_channel = (e_channel - lo) / (hi - lo)
+    e_channel = (e_channel - lo) / (hi - lo + 1e-6)
     return np.clip(e_channel, 0.0, 1.0).astype(np.float32)
 
 
@@ -191,81 +191,12 @@ def _hed_color_jitter(image_rgb_u8: np.ndarray, sigma: float = 0.05,
 
 
 
-def _apply_point_ratio(point_map: np.ndarray, clu: np.ndarray,
-                        ratio: float, rng) -> tuple[np.ndarray, np.ndarray]:
-    """Keep `ratio` fraction of points; mark dropped points' disks (clu==1) as ignore (clu==2).
-
-    BoNuS-style annotation efficiency test. Voronoi gap (clu==2) unchanged.
-    """
-    from scipy.ndimage import label as sclabel
-    from skimage.draw import disk as skdisk
-    pm = (point_map > 0).astype(np.uint8)
-    labeled, n = sclabel(pm)
-    if n == 0:
-        return point_map, clu
-    keep = rng.random(n) < ratio
-    new_pm = np.zeros_like(point_map)
-    new_clu = clu.copy()
-    h, w = clu.shape
-    for i in range(1, n + 1):
-        mask = (labeled == i)
-        ys, xs = np.where(mask)
-        if len(ys) == 0:
-            continue
-        if keep[i - 1]:
-            new_pm[mask] = 1
-        else:
-            cy, cx = int(ys.mean()), int(xs.mean())
-            rr, cc = skdisk((cy, cx), 15, shape=(h, w))
-            sel = (new_clu[rr, cc] == 1)
-            rr_sel, cc_sel = rr[sel], cc[sel]
-            new_clu[rr_sel, cc_sel] = 2
-    return new_pm, new_clu
-
-
-def _apply_point_shift(point_map: np.ndarray, clu: np.ndarray,
-                        max_shift: int, rng) -> tuple[np.ndarray, np.ndarray]:
-    """Shift each point by uniform random pixels in [-max_shift, max_shift].
-
-    Tests robustness to noisy click positions. Cluster disks (clu==1) get
-    redrawn at shifted positions; original disks become ignore.
-    """
-    from scipy.ndimage import label as sclabel
-    from skimage.draw import disk as skdisk
-    pm = (point_map > 0).astype(np.uint8)
-    labeled, n = sclabel(pm)
-    if n == 0 or max_shift <= 0:
-        return point_map, clu
-    new_pm = np.zeros_like(point_map)
-    new_clu = clu.copy()
-    h, w = clu.shape
-    # Erase all original fg disks first (mark as 2).
-    new_clu[new_clu == 1] = 2
-    for i in range(1, n + 1):
-        mask = (labeled == i)
-        ys, xs = np.where(mask)
-        if len(ys) == 0:
-            continue
-        cy, cx = int(ys.mean()), int(xs.mean())
-        dy = int(rng.integers(-max_shift, max_shift + 1))
-        dx = int(rng.integers(-max_shift, max_shift + 1))
-        ny, nx = int(np.clip(cy + dy, 0, h - 1)), int(np.clip(cx + dx, 0, w - 1))
-        new_pm[ny, nx] = 1
-        rr, cc = skdisk((ny, nx), 15, shape=(h, w))
-        # Only set clu==1 where it was previously ignore (clu==2) — preserve bg (clu==0).
-        sel = (new_clu[rr, cc] == 2)
-        rr_sel, cc_sel = rr[sel], cc[sel]
-        new_clu[rr_sel, cc_sel] = 1
-    return new_pm, new_clu
-
-
 def _scale_jitter(image, stain_h, stain_e, clu, offset, basin_valid, point_map,
-                  instance_id, s: float, crop_size: int):
+                  instance_id, rho, center_target, s: float, crop_size: int):
     """Synthesize varied nucleus sizes by rescaling crop content by factor s, output
     kept at crop_size. s<1 -> smaller nuclei (mean-padded); s>1 -> larger (center-crop).
-    offset is a centroid-radial direction field -> bilinear resize WITHOUT renorm
-    (directions preserved under uniform scaling; magnitudes kept in-distribution, NOT
-    forced to unit). point_map points re-placed at scaled coords (not interpolated).
+    offset is displacement / fixed s0=250; resize and scale displacement
+    magnitudes by the actual spatial scale. point_map points re-placed at scaled coords (not interpolated).
     clu/instance_id use nearest. Pad fill is bg-consistent."""
     import cv2
     S = int(crop_size)
@@ -286,13 +217,14 @@ def _scale_jitter(image, stain_h, stain_e, clu, offset, basin_valid, point_map,
     iid_r = _near_int(instance_id)
     off_r = cv2.resize(np.transpose(offset, (1, 2, 0)), (inner, inner),
                        interpolation=cv2.INTER_LINEAR)
-    off_r = np.ascontiguousarray(np.transpose(off_r, (2, 0, 1)).astype(np.float32))
+    off_r = np.ascontiguousarray(np.transpose(off_r, (2, 0, 1)).astype(np.float32)) * (inner / S)
+    rho_r = _lin(rho); ctr_r = _lin(center_target)
 
     ys, xs = np.where(point_map > 0)
     pm_r = np.zeros((inner, inner), dtype=point_map.dtype)
     if len(ys):
-        nys = np.clip(np.round(ys * float(s)).astype(int), 0, inner - 1)
-        nxs = np.clip(np.round(xs * float(s)).astype(int), 0, inner - 1)
+        nys = np.clip(np.round(ys * (inner / S)).astype(int), 0, inner - 1)
+        nxs = np.clip(np.round(xs * (inner / S)).astype(int), 0, inner - 1)
         pm_r[nys, nxs] = 1
 
     if inner <= S:
@@ -309,6 +241,8 @@ def _scale_jitter(image, stain_h, stain_e, clu, offset, basin_valid, point_map,
         out_iid = np.zeros((S, S), instance_id.dtype); out_iid[sl, sl] = iid_r
         out_off = np.zeros((2, S, S), np.float32); out_off[:, sl, sl] = off_r
         out_pm = np.zeros((S, S), point_map.dtype); out_pm[sl, sl] = pm_r
+        out_rho = np.zeros((S,S),np.float32); out_rho[sl,sl] = rho_r
+        out_ctr = np.zeros((S,S),np.float32); out_ctr[sl,sl] = ctr_r
     else:
         o = (inner - S) // 2
         sl = slice(o, o + S)
@@ -320,7 +254,8 @@ def _scale_jitter(image, stain_h, stain_e, clu, offset, basin_valid, point_map,
         out_iid = np.ascontiguousarray(iid_r[sl, sl])
         out_off = np.ascontiguousarray(off_r[:, sl, sl])
         out_pm = np.ascontiguousarray(pm_r[sl, sl])
-    return out_img, out_sh, out_se, out_clu, out_off, out_bv, out_pm, out_iid
+        out_rho = np.ascontiguousarray(rho_r[sl,sl]); out_ctr = np.ascontiguousarray(ctr_r[sl,sl])
+    return out_img, out_sh, out_se, out_clu, out_off, out_bv, out_pm, out_iid, out_rho, out_ctr
 
 
 class NucleiV3PatchDataset(Dataset):
@@ -344,8 +279,8 @@ class NucleiV3PatchDataset(Dataset):
         point_shift: int = 0,
         point_subset_seed: int = 0,
         scale_jitter: bool = False,
-        scale_jitter_min: float = 0.5,
-        scale_jitter_max: float = 1.3,
+        scale_jitter_min: float = 0.8,
+        scale_jitter_max: float = 1.25,
     ) -> None:
         self.root = Path(root)
         self.dataset = dataset.upper()
@@ -371,6 +306,16 @@ class NucleiV3PatchDataset(Dataset):
         self.scale_jitter = bool(scale_jitter)
         self.scale_jitter_min = float(scale_jitter_min)
         self.scale_jitter_max = float(scale_jitter_max)
+        from chromaflow.protocol import load_splits, PROTOCOL_VERSION
+        split_data, split_hash = load_splits(self.root, self.dataset)
+        prep_path = self.root / 'data/official_clean/ours_prepared' / self.dataset / 'preparation.json'
+        prep = json.loads(prep_path.read_text())
+        if prep.get('protocol') != PROTOCOL_VERSION or prep.get('split_sha256') != split_hash:
+            raise ValueError('Prepared targets do not match the final split/protocol. Run chromaflow.prepare.')
+        if prep.get('point_ratio') != self.point_ratio or prep.get('point_subset_seed') != self.point_subset_seed or prep.get('point_shift', 0) != self.point_shift:
+            raise ValueError('Point budget/seed mismatch: sample once with chromaflow.prepare before training.')
+        self.preparation = prep
+        self.allowed_images = set(split_data[subset])
         self.records = self._build_records()
         if not self.records:
             raise RuntimeError(f"No v3 patch records found for {self.dataset}/{subset}")
@@ -384,10 +329,13 @@ class NucleiV3PatchDataset(Dataset):
         records: list[PatchRecord] = []
         for image_path in sorted(image_dir.glob("*.png")):
             tile = image_path.stem
+            source = self.preparation['tiles'].get(tile, {}).get('image_id')
+            if source not in self.allowed_images:
+                raise ValueError(f'Patch {tile} has no valid {self.subset} provenance')
             clu_path = clu_dir / f"{tile}_label_clu.png"
             pob_path = pob_dir / f"{tile}.npz"
             if not clu_path.exists() or not pob_path.exists():
-                continue
+                raise FileNotFoundError(f"Missing weak targets for {tile}")
             sam_path = None
             if self.sam_pseudo_path is not None:
                 candidate = self.sam_pseudo_path / self.subset / f"{tile}.npz"
@@ -411,25 +359,8 @@ class NucleiV3PatchDataset(Dataset):
         offset = pob["offset"].astype(np.float32)
         basin_valid = pob["basin_valid"].astype(np.float32)
         point_map = pob["point_map"].astype(np.uint8)
-        # Apply training-time point ratio / shift perturbations (BoNuS-style analyses).
-        if self.augment and (self.point_ratio < 1.0 or self.point_shift > 0):
-            if self.point_ratio < 1.0:
-                # FIXED sparse annotation: deterministic per-image subset seeded by
-                # the tile id (crc32), so the SAME points are kept every epoch and
-                # subsets are nested across ratios. This measures true fixed-budget
-                # annotation efficiency, NOT per-epoch resampling (which unions to
-                # ~full supervision over 150 epochs and flattens the curve).
-                _pr_rng = np.random.default_rng(
-                    (zlib.crc32(rec.tile.encode()) + self.point_subset_seed) & 0x7fffffff)
-                point_map, clu = _apply_point_ratio(point_map, clu, self.point_ratio, _pr_rng)
-            if self.point_shift > 0:
-                # FIXED noisy clicks: deterministic per-image displacement (same every
-                # epoch), seeded by tile+seed (+777 to decorrelate from the ratio rng).
-                # Measures robustness to a fixed set of imprecise annotations, NOT
-                # per-epoch jitter augmentation (which would average noise to ~clean).
-                _ps_rng = np.random.default_rng(
-                    (zlib.crc32(rec.tile.encode()) + self.point_subset_seed + 777) & 0x7fffffff)
-                point_map, clu = _apply_point_shift(point_map, clu, self.point_shift, _ps_rng)
+        rho = pob["rho"].astype(np.float32)
+        center_target = pob["center_target"].astype(np.float32)
         instance_id = pob["instance_id_soft"].astype(np.int32)
 
         # D9 SAGS — snap GT clicks to local H-peak (per-tile, before crop).
@@ -464,6 +395,8 @@ class NucleiV3PatchDataset(Dataset):
             image = _crop_hw(image, top, left, self.crop_size)
             stain_h = _crop_hw(stain_h, top, left, self.crop_size)
             stain_e = _crop_hw(stain_e, top, left, self.crop_size)
+            rho = _crop_hw(rho, top, left, self.crop_size)
+            center_target = _crop_hw(center_target, top, left, self.crop_size)
             clu = _crop_hw(clu, top, left, self.crop_size)
             offset = _crop_chw(offset, top, left, self.crop_size)
             basin_valid = _crop_hw(basin_valid, top, left, self.crop_size)
@@ -478,6 +411,7 @@ class NucleiV3PatchDataset(Dataset):
                 image = image[:, ::-1].copy()
                 stain_h = stain_h[:, ::-1].copy()
                 stain_e = stain_e[:, ::-1].copy()
+                rho = rho[:, ::-1].copy(); center_target = center_target[:, ::-1].copy()
                 clu = clu[:, ::-1].copy()
                 offset = offset[:, :, ::-1].copy()
                 offset[0] *= -1.0
@@ -492,6 +426,7 @@ class NucleiV3PatchDataset(Dataset):
                 image = image[::-1, :].copy()
                 stain_h = stain_h[::-1, :].copy()
                 stain_e = stain_e[::-1, :].copy()
+                rho = rho[::-1, :].copy(); center_target = center_target[::-1, :].copy()
                 clu = clu[::-1, :].copy()
                 offset = offset[:, ::-1, :].copy()
                 offset[1] *= -1.0
@@ -507,6 +442,7 @@ class NucleiV3PatchDataset(Dataset):
                 image = np.rot90(image, k, axes=(0, 1)).copy()
                 stain_h = np.rot90(stain_h, k).copy()
                 stain_e = np.rot90(stain_e, k).copy()
+                rho = np.rot90(rho,k).copy(); center_target = np.rot90(center_target,k).copy()
                 clu = np.rot90(clu, k).copy()
                 offset = _rotate_flow(offset, k)
                 basin_valid = np.rot90(basin_valid, k).copy()
@@ -519,9 +455,9 @@ class NucleiV3PatchDataset(Dataset):
                     and random.random() < 0.5):
                 _sj = random.uniform(self.scale_jitter_min, self.scale_jitter_max)
                 (image, stain_h, stain_e, clu, offset, basin_valid,
-                 point_map, instance_id) = _scale_jitter(
+                 point_map, instance_id, rho, center_target) = _scale_jitter(
                     image, stain_h, stain_e, clu, offset, basin_valid,
-                    point_map, instance_id, _sj, self.crop_size)
+                    point_map, instance_id, rho, center_target, _sj, self.crop_size)
 
         # GAP: distance from each pixel to nearest clu==1 pixel (post-augmentation).
         # Used by L_GAP loss for geometric anchor-proximity supervision on clu==2.
@@ -579,6 +515,8 @@ class NucleiV3PatchDataset(Dataset):
             "offset": torch.from_numpy(offset.copy()).float(),
             "basin_valid": torch.from_numpy(basin_valid.copy()).float(),
             "point_map": torch.from_numpy(point_map.copy()).float(),
+            "rho": torch.from_numpy(rho.copy()).float(),
+            "center_target": torch.from_numpy(center_target.copy()).float(),
             "instance_id": torch.from_numpy(instance_id.copy()).long(),
             "sam_fg_mask": torch.from_numpy(pseudo["sam_fg_mask"].copy()).float(),
             "sam_flow": torch.from_numpy(pseudo["sam_flow"].copy()).float(),

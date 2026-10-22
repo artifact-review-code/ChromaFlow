@@ -1,577 +1,577 @@
 group,method,direction,metric,value
-fully_supervised,U-Net,MO->CPM,AJI,0.519
-fully_supervised,U-Net,MO->CPM,Dice,0.724
-fully_supervised,U-Net,MO->CPM,DQ,0.675
-fully_supervised,U-Net,MO->CPM,PQ,0.473
-fully_supervised,U-Net,CPM->MO,AJI,0.490
-fully_supervised,U-Net,CPM->MO,Dice,0.715
-fully_supervised,U-Net,CPM->MO,DQ,0.643
-fully_supervised,U-Net,CPM->MO,PQ,0.476
-fully_supervised,U-Net,Co->Nu,AJI,0.091
-fully_supervised,U-Net,Co->Nu,Dice,0.281
-fully_supervised,U-Net,Co->Nu,DQ,0.084
-fully_supervised,U-Net,Co->Nu,PQ,0.052
-fully_supervised,U-Net,Nu->Co,AJI,0.042
-fully_supervised,U-Net,Nu->Co,Dice,0.215
-fully_supervised,U-Net,Nu->Co,DQ,0.069
-fully_supervised,U-Net,Nu->Co,PQ,0.052
-fully_supervised,U-Net,MO->Co,AJI,0.183
-fully_supervised,U-Net,MO->Co,Dice,0.461
-fully_supervised,U-Net,MO->Co,DQ,0.301
-fully_supervised,U-Net,MO->Co,PQ,0.210
-fully_supervised,U-Net,MO->Nu,AJI,0.256
-fully_supervised,U-Net,MO->Nu,Dice,0.509
-fully_supervised,U-Net,MO->Nu,DQ,0.274
-fully_supervised,U-Net,MO->Nu,PQ,0.189
-fully_supervised,U-Net,CPM->Co,AJI,0.128
-fully_supervised,U-Net,CPM->Co,Dice,0.366
-fully_supervised,U-Net,CPM->Co,DQ,0.241
-fully_supervised,U-Net,CPM->Co,PQ,0.163
-fully_supervised,U-Net,CPM->Nu,AJI,0.273
-fully_supervised,U-Net,CPM->Nu,Dice,0.531
-fully_supervised,U-Net,CPM->Nu,DQ,0.300
-fully_supervised,U-Net,CPM->Nu,PQ,0.208
-fully_supervised,HoVer-Net,MO->CPM,AJI,0.618
-fully_supervised,HoVer-Net,MO->CPM,Dice,0.804
-fully_supervised,HoVer-Net,MO->CPM,DQ,0.802
-fully_supervised,HoVer-Net,MO->CPM,PQ,0.632
-fully_supervised,HoVer-Net,CPM->MO,AJI,0.599
-fully_supervised,HoVer-Net,CPM->MO,Dice,0.775
-fully_supervised,HoVer-Net,CPM->MO,DQ,0.790
-fully_supervised,HoVer-Net,CPM->MO,PQ,0.590
-fully_supervised,HoVer-Net,Co->Nu,AJI,0.051
-fully_supervised,HoVer-Net,Co->Nu,Dice,0.189
-fully_supervised,HoVer-Net,Co->Nu,DQ,0.044
-fully_supervised,HoVer-Net,Co->Nu,PQ,0.029
-fully_supervised,HoVer-Net,Nu->Co,AJI,0.035
-fully_supervised,HoVer-Net,Nu->Co,Dice,0.259
-fully_supervised,HoVer-Net,Nu->Co,DQ,0.078
-fully_supervised,HoVer-Net,Nu->Co,PQ,0.061
-fully_supervised,HoVer-Net,MO->Co,AJI,0.368
-fully_supervised,HoVer-Net,MO->Co,Dice,0.633
-fully_supervised,HoVer-Net,MO->Co,DQ,0.569
-fully_supervised,HoVer-Net,MO->Co,PQ,0.449
-fully_supervised,HoVer-Net,MO->Nu,AJI,0.222
-fully_supervised,HoVer-Net,MO->Nu,Dice,0.521
-fully_supervised,HoVer-Net,MO->Nu,DQ,0.379
-fully_supervised,HoVer-Net,MO->Nu,PQ,0.272
-fully_supervised,HoVer-Net,CPM->Co,AJI,0.332
-fully_supervised,HoVer-Net,CPM->Co,Dice,0.584
-fully_supervised,HoVer-Net,CPM->Co,DQ,0.506
-fully_supervised,HoVer-Net,CPM->Co,PQ,0.386
-fully_supervised,HoVer-Net,CPM->Nu,AJI,0.181
-fully_supervised,HoVer-Net,CPM->Nu,Dice,0.469
-fully_supervised,HoVer-Net,CPM->Nu,DQ,0.280
-fully_supervised,HoVer-Net,CPM->Nu,PQ,0.199
-foundation_model,SAM ViT-H,MO->CPM,AJI,0.470
-foundation_model,SAM ViT-H,MO->CPM,Dice,0.673
-foundation_model,SAM ViT-H,MO->CPM,DQ,0.583
-foundation_model,SAM ViT-H,MO->CPM,PQ,0.449
-foundation_model,SAM ViT-H,CPM->MO,AJI,0.366
-foundation_model,SAM ViT-H,CPM->MO,Dice,0.599
-foundation_model,SAM ViT-H,CPM->MO,DQ,0.620
-foundation_model,SAM ViT-H,CPM->MO,PQ,0.474
-foundation_model,SAM ViT-H,Co->Nu,AJI,0.361
-foundation_model,SAM ViT-H,Co->Nu,Dice,0.590
-foundation_model,SAM ViT-H,Co->Nu,DQ,0.500
-foundation_model,SAM ViT-H,Co->Nu,PQ,0.375
-foundation_model,SAM ViT-H,Nu->Co,AJI,0.317
-foundation_model,SAM ViT-H,Nu->Co,Dice,0.510
-foundation_model,SAM ViT-H,Nu->Co,DQ,0.480
-foundation_model,SAM ViT-H,Nu->Co,PQ,0.371
-foundation_model,SAM ViT-H,MO->Co,AJI,0.317
-foundation_model,SAM ViT-H,MO->Co,Dice,0.510
-foundation_model,SAM ViT-H,MO->Co,DQ,0.480
-foundation_model,SAM ViT-H,MO->Co,PQ,0.371
-foundation_model,SAM ViT-H,MO->Nu,AJI,0.361
-foundation_model,SAM ViT-H,MO->Nu,Dice,0.590
-foundation_model,SAM ViT-H,MO->Nu,DQ,0.500
-foundation_model,SAM ViT-H,MO->Nu,PQ,0.375
-foundation_model,SAM ViT-H,CPM->Co,AJI,0.317
-foundation_model,SAM ViT-H,CPM->Co,Dice,0.510
-foundation_model,SAM ViT-H,CPM->Co,DQ,0.480
-foundation_model,SAM ViT-H,CPM->Co,PQ,0.371
-foundation_model,SAM ViT-H,CPM->Nu,AJI,0.361
-foundation_model,SAM ViT-H,CPM->Nu,Dice,0.590
-foundation_model,SAM ViT-H,CPM->Nu,DQ,0.500
-foundation_model,SAM ViT-H,CPM->Nu,PQ,0.375
-foundation_model,CellViT-SAM-H,MO->CPM,AJI,0.609
-foundation_model,CellViT-SAM-H,MO->CPM,Dice,0.815
-foundation_model,CellViT-SAM-H,MO->CPM,DQ,0.827
-foundation_model,CellViT-SAM-H,MO->CPM,PQ,0.671
-foundation_model,CellViT-SAM-H,CPM->MO,AJI,0.657
-foundation_model,CellViT-SAM-H,CPM->MO,Dice,0.816
-foundation_model,CellViT-SAM-H,CPM->MO,DQ,0.871
-foundation_model,CellViT-SAM-H,CPM->MO,PQ,0.672
-foundation_model,CellViT-SAM-H,Co->Nu,AJI,0.307
-foundation_model,CellViT-SAM-H,Co->Nu,Dice,0.583
-foundation_model,CellViT-SAM-H,Co->Nu,DQ,0.467
-foundation_model,CellViT-SAM-H,Co->Nu,PQ,0.352
-foundation_model,CellViT-SAM-H,Nu->Co,AJI,0.341
-foundation_model,CellViT-SAM-H,Nu->Co,Dice,0.636
-foundation_model,CellViT-SAM-H,Nu->Co,DQ,0.550
-foundation_model,CellViT-SAM-H,Nu->Co,PQ,0.411
-foundation_model,CellViT-SAM-H,MO->Co,AJI,0.341
-foundation_model,CellViT-SAM-H,MO->Co,Dice,0.636
-foundation_model,CellViT-SAM-H,MO->Co,DQ,0.550
-foundation_model,CellViT-SAM-H,MO->Co,PQ,0.411
-foundation_model,CellViT-SAM-H,MO->Nu,AJI,0.307
-foundation_model,CellViT-SAM-H,MO->Nu,Dice,0.583
-foundation_model,CellViT-SAM-H,MO->Nu,DQ,0.467
-foundation_model,CellViT-SAM-H,MO->Nu,PQ,0.352
-foundation_model,CellViT-SAM-H,CPM->Co,AJI,0.341
-foundation_model,CellViT-SAM-H,CPM->Co,Dice,0.636
-foundation_model,CellViT-SAM-H,CPM->Co,DQ,0.550
-foundation_model,CellViT-SAM-H,CPM->Co,PQ,0.411
-foundation_model,CellViT-SAM-H,CPM->Nu,AJI,0.307
-foundation_model,CellViT-SAM-H,CPM->Nu,Dice,0.583
-foundation_model,CellViT-SAM-H,CPM->Nu,DQ,0.467
-foundation_model,CellViT-SAM-H,CPM->Nu,PQ,0.352
-foundation_model,Cellpose 3,MO->CPM,AJI,0.301
-foundation_model,Cellpose 3,MO->CPM,Dice,0.487
-foundation_model,Cellpose 3,MO->CPM,DQ,0.447
-foundation_model,Cellpose 3,MO->CPM,PQ,0.313
-foundation_model,Cellpose 3,CPM->MO,AJI,0.274
-foundation_model,Cellpose 3,CPM->MO,Dice,0.485
-foundation_model,Cellpose 3,CPM->MO,DQ,0.431
-foundation_model,Cellpose 3,CPM->MO,PQ,0.295
-foundation_model,Cellpose 3,Co->Nu,AJI,0.252
-foundation_model,Cellpose 3,Co->Nu,Dice,0.506
-foundation_model,Cellpose 3,Co->Nu,DQ,0.396
-foundation_model,Cellpose 3,Co->Nu,PQ,0.291
-foundation_model,Cellpose 3,Nu->Co,AJI,0.154
-foundation_model,Cellpose 3,Nu->Co,Dice,0.331
-foundation_model,Cellpose 3,Nu->Co,DQ,0.224
-foundation_model,Cellpose 3,Nu->Co,PQ,0.150
-foundation_model,Cellpose 3,MO->Co,AJI,0.154
-foundation_model,Cellpose 3,MO->Co,Dice,0.331
-foundation_model,Cellpose 3,MO->Co,DQ,0.224
-foundation_model,Cellpose 3,MO->Co,PQ,0.150
-foundation_model,Cellpose 3,MO->Nu,AJI,0.252
-foundation_model,Cellpose 3,MO->Nu,Dice,0.506
-foundation_model,Cellpose 3,MO->Nu,DQ,0.396
-foundation_model,Cellpose 3,MO->Nu,PQ,0.291
-foundation_model,Cellpose 3,CPM->Co,AJI,0.154
-foundation_model,Cellpose 3,CPM->Co,Dice,0.331
-foundation_model,Cellpose 3,CPM->Co,DQ,0.224
-foundation_model,Cellpose 3,CPM->Co,PQ,0.150
-foundation_model,Cellpose 3,CPM->Nu,AJI,0.252
-foundation_model,Cellpose 3,CPM->Nu,Dice,0.506
-foundation_model,Cellpose 3,CPM->Nu,DQ,0.396
-foundation_model,Cellpose 3,CPM->Nu,PQ,0.291
-foundation_model,SAM 2.1,MO->CPM,AJI,0.286
-foundation_model,SAM 2.1,MO->CPM,Dice,0.662
-foundation_model,SAM 2.1,MO->CPM,DQ,0.669
-foundation_model,SAM 2.1,MO->CPM,PQ,0.548
-foundation_model,SAM 2.1,CPM->MO,AJI,0.025
-foundation_model,SAM 2.1,CPM->MO,Dice,0.296
-foundation_model,SAM 2.1,CPM->MO,DQ,0.229
-foundation_model,SAM 2.1,CPM->MO,PQ,0.180
-foundation_model,SAM 2.1,Co->Nu,AJI,0.182
-foundation_model,SAM 2.1,Co->Nu,Dice,0.535
-foundation_model,SAM 2.1,Co->Nu,DQ,0.439
-foundation_model,SAM 2.1,Co->Nu,PQ,0.337
-foundation_model,SAM 2.1,Nu->Co,AJI,0.096
-foundation_model,SAM 2.1,Nu->Co,Dice,0.374
-foundation_model,SAM 2.1,Nu->Co,DQ,0.377
-foundation_model,SAM 2.1,Nu->Co,PQ,0.296
-foundation_model,SAM 2.1,MO->Co,AJI,0.096
-foundation_model,SAM 2.1,MO->Co,Dice,0.374
-foundation_model,SAM 2.1,MO->Co,DQ,0.377
-foundation_model,SAM 2.1,MO->Co,PQ,0.296
-foundation_model,SAM 2.1,MO->Nu,AJI,0.182
-foundation_model,SAM 2.1,MO->Nu,Dice,0.535
-foundation_model,SAM 2.1,MO->Nu,DQ,0.439
-foundation_model,SAM 2.1,MO->Nu,PQ,0.337
-foundation_model,SAM 2.1,CPM->Co,AJI,0.096
-foundation_model,SAM 2.1,CPM->Co,Dice,0.374
-foundation_model,SAM 2.1,CPM->Co,DQ,0.377
-foundation_model,SAM 2.1,CPM->Co,PQ,0.296
-foundation_model,SAM 2.1,CPM->Nu,AJI,0.182
-foundation_model,SAM 2.1,CPM->Nu,Dice,0.535
-foundation_model,SAM 2.1,CPM->Nu,DQ,0.439
-foundation_model,SAM 2.1,CPM->Nu,PQ,0.337
-foundation_model,PathoSAM,MO->CPM,AJI,0.632
-foundation_model,PathoSAM,MO->CPM,Dice,0.807
-foundation_model,PathoSAM,MO->CPM,DQ,0.728
-foundation_model,PathoSAM,MO->CPM,PQ,0.583
-foundation_model,PathoSAM,CPM->MO,AJI,0.416
-foundation_model,PathoSAM,CPM->MO,Dice,0.712
-foundation_model,PathoSAM,CPM->MO,DQ,0.713
-foundation_model,PathoSAM,CPM->MO,PQ,0.541
-foundation_model,PathoSAM,Co->Nu,AJI,0.397
-foundation_model,PathoSAM,Co->Nu,Dice,0.636
-foundation_model,PathoSAM,Co->Nu,DQ,0.417
-foundation_model,PathoSAM,Co->Nu,PQ,0.299
-foundation_model,PathoSAM,Nu->Co,AJI,0.455
-foundation_model,PathoSAM,Nu->Co,Dice,0.663
-foundation_model,PathoSAM,Nu->Co,DQ,0.480
-foundation_model,PathoSAM,Nu->Co,PQ,0.373
-foundation_model,PathoSAM,MO->Co,AJI,0.455
-foundation_model,PathoSAM,MO->Co,Dice,0.663
-foundation_model,PathoSAM,MO->Co,DQ,0.480
-foundation_model,PathoSAM,MO->Co,PQ,0.373
-foundation_model,PathoSAM,MO->Nu,AJI,0.397
-foundation_model,PathoSAM,MO->Nu,Dice,0.636
-foundation_model,PathoSAM,MO->Nu,DQ,0.417
-foundation_model,PathoSAM,MO->Nu,PQ,0.299
-foundation_model,PathoSAM,CPM->Co,AJI,0.455
-foundation_model,PathoSAM,CPM->Co,Dice,0.663
-foundation_model,PathoSAM,CPM->Co,DQ,0.480
-foundation_model,PathoSAM,CPM->Co,PQ,0.373
-foundation_model,PathoSAM,CPM->Nu,AJI,0.397
-foundation_model,PathoSAM,CPM->Nu,Dice,0.636
-foundation_model,PathoSAM,CPM->Nu,DQ,0.417
-foundation_model,PathoSAM,CPM->Nu,PQ,0.299
-weakly_supervised,Qu,MO->CPM,AJI,0.454
-weakly_supervised,Qu,MO->CPM,Dice,0.654
-weakly_supervised,Qu,MO->CPM,DQ,0.568
-weakly_supervised,Qu,MO->CPM,PQ,0.378
-weakly_supervised,Qu,CPM->MO,AJI,0.576
-weakly_supervised,Qu,CPM->MO,Dice,0.740
-weakly_supervised,Qu,CPM->MO,DQ,0.733
-weakly_supervised,Qu,CPM->MO,PQ,0.517
-weakly_supervised,Qu,Co->Nu,AJI,0.131
-weakly_supervised,Qu,Co->Nu,Dice,0.275
-weakly_supervised,Qu,Co->Nu,DQ,0.068
-weakly_supervised,Qu,Co->Nu,PQ,0.043
-weakly_supervised,Qu,Nu->Co,AJI,0.022
-weakly_supervised,Qu,Nu->Co,Dice,0.152
-weakly_supervised,Qu,Nu->Co,DQ,0.033
-weakly_supervised,Qu,Nu->Co,PQ,0.029
-weakly_supervised,Qu,MO->Co,AJI,0.201
-weakly_supervised,Qu,MO->Co,Dice,0.431
-weakly_supervised,Qu,MO->Co,DQ,0.266
-weakly_supervised,Qu,MO->Co,PQ,0.181
-weakly_supervised,Qu,MO->Nu,AJI,0.158
-weakly_supervised,Qu,MO->Nu,Dice,0.404
-weakly_supervised,Qu,MO->Nu,DQ,0.191
-weakly_supervised,Qu,MO->Nu,PQ,0.122
-weakly_supervised,Qu,CPM->Co,AJI,0.217
-weakly_supervised,Qu,CPM->Co,Dice,0.448
-weakly_supervised,Qu,CPM->Co,DQ,0.283
-weakly_supervised,Qu,CPM->Co,PQ,0.195
-weakly_supervised,Qu,CPM->Nu,AJI,0.291
-weakly_supervised,Qu,CPM->Nu,Dice,0.548
-weakly_supervised,Qu,CPM->Nu,DQ,0.339
-weakly_supervised,Qu,CPM->Nu,PQ,0.228
-weakly_supervised,Scribble2Label,MO->CPM,AJI,0.443
-weakly_supervised,Scribble2Label,MO->CPM,Dice,0.636
-weakly_supervised,Scribble2Label,MO->CPM,DQ,0.303
-weakly_supervised,Scribble2Label,MO->CPM,PQ,0.202
-weakly_supervised,Scribble2Label,CPM->MO,AJI,0.474
-weakly_supervised,Scribble2Label,CPM->MO,Dice,0.662
-weakly_supervised,Scribble2Label,CPM->MO,DQ,0.474
-weakly_supervised,Scribble2Label,CPM->MO,PQ,0.322
-weakly_supervised,Scribble2Label,Co->Nu,AJI,0.183
-weakly_supervised,Scribble2Label,Co->Nu,Dice,0.362
-weakly_supervised,Scribble2Label,Co->Nu,DQ,0.067
-weakly_supervised,Scribble2Label,Co->Nu,PQ,0.042
-weakly_supervised,Scribble2Label,Nu->Co,AJI,0.085
-weakly_supervised,Scribble2Label,Nu->Co,Dice,0.259
-weakly_supervised,Scribble2Label,Nu->Co,DQ,0.051
-weakly_supervised,Scribble2Label,Nu->Co,PQ,0.032
-weakly_supervised,Scribble2Label,MO->Co,AJI,0.083
-weakly_supervised,Scribble2Label,MO->Co,Dice,0.317
-weakly_supervised,Scribble2Label,MO->Co,DQ,0.084
-weakly_supervised,Scribble2Label,MO->Co,PQ,0.057
-weakly_supervised,Scribble2Label,MO->Nu,AJI,0.170
-weakly_supervised,Scribble2Label,MO->Nu,Dice,0.353
-weakly_supervised,Scribble2Label,MO->Nu,DQ,0.094
-weakly_supervised,Scribble2Label,MO->Nu,PQ,0.059
-weakly_supervised,Scribble2Label,CPM->Co,AJI,0.187
-weakly_supervised,Scribble2Label,CPM->Co,Dice,0.403
-weakly_supervised,Scribble2Label,CPM->Co,DQ,0.176
-weakly_supervised,Scribble2Label,CPM->Co,PQ,0.112
-weakly_supervised,Scribble2Label,CPM->Nu,AJI,0.220
-weakly_supervised,Scribble2Label,CPM->Nu,Dice,0.439
-weakly_supervised,Scribble2Label,CPM->Nu,DQ,0.102
-weakly_supervised,Scribble2Label,CPM->Nu,PQ,0.066
-weakly_supervised,SPN+IEN,MO->CPM,AJI,0.518
-weakly_supervised,SPN+IEN,MO->CPM,Dice,0.711
-weakly_supervised,SPN+IEN,MO->CPM,DQ,0.601
-weakly_supervised,SPN+IEN,MO->CPM,PQ,0.428
-weakly_supervised,SPN+IEN,CPM->MO,AJI,0.535
-weakly_supervised,SPN+IEN,CPM->MO,Dice,0.706
-weakly_supervised,SPN+IEN,CPM->MO,DQ,0.692
-weakly_supervised,SPN+IEN,CPM->MO,PQ,0.477
-weakly_supervised,SPN+IEN,Co->Nu,AJI,0.005
-weakly_supervised,SPN+IEN,Co->Nu,Dice,0.031
-weakly_supervised,SPN+IEN,Co->Nu,DQ,0.003
-weakly_supervised,SPN+IEN,Co->Nu,PQ,0.002
-weakly_supervised,SPN+IEN,Nu->Co,AJI,0.035
-weakly_supervised,SPN+IEN,Nu->Co,Dice,0.122
-weakly_supervised,SPN+IEN,Nu->Co,DQ,0.030
-weakly_supervised,SPN+IEN,Nu->Co,PQ,0.028
-weakly_supervised,SPN+IEN,MO->Co,AJI,0.215
-weakly_supervised,SPN+IEN,MO->Co,Dice,0.473
-weakly_supervised,SPN+IEN,MO->Co,DQ,0.311
-weakly_supervised,SPN+IEN,MO->Co,PQ,0.205
-weakly_supervised,SPN+IEN,MO->Nu,AJI,0.259
-weakly_supervised,SPN+IEN,MO->Nu,Dice,0.505
-weakly_supervised,SPN+IEN,MO->Nu,DQ,0.149
-weakly_supervised,SPN+IEN,MO->Nu,PQ,0.103
-weakly_supervised,SPN+IEN,CPM->Co,AJI,0.203
-weakly_supervised,SPN+IEN,CPM->Co,Dice,0.459
-weakly_supervised,SPN+IEN,CPM->Co,DQ,0.292
-weakly_supervised,SPN+IEN,CPM->Co,PQ,0.192
-weakly_supervised,SPN+IEN,CPM->Nu,AJI,0.287
-weakly_supervised,SPN+IEN,CPM->Nu,Dice,0.528
-weakly_supervised,SPN+IEN,CPM->Nu,DQ,0.331
-weakly_supervised,SPN+IEN,CPM->Nu,PQ,0.218
-weakly_supervised,SC-Net,MO->CPM,AJI,0.415
-weakly_supervised,SC-Net,MO->CPM,Dice,0.616
-weakly_supervised,SC-Net,MO->CPM,DQ,0.479
-weakly_supervised,SC-Net,MO->CPM,PQ,0.309
-weakly_supervised,SC-Net,CPM->MO,AJI,0.500
-weakly_supervised,SC-Net,CPM->MO,Dice,0.708
-weakly_supervised,SC-Net,CPM->MO,DQ,0.664
-weakly_supervised,SC-Net,CPM->MO,PQ,0.466
-weakly_supervised,SC-Net,Co->Nu,AJI,0.090
-weakly_supervised,SC-Net,Co->Nu,Dice,0.177
-weakly_supervised,SC-Net,Co->Nu,DQ,0.017
-weakly_supervised,SC-Net,Co->Nu,PQ,0.010
-weakly_supervised,SC-Net,Nu->Co,AJI,0.027
-weakly_supervised,SC-Net,Nu->Co,Dice,0.179
-weakly_supervised,SC-Net,Nu->Co,DQ,0.036
-weakly_supervised,SC-Net,Nu->Co,PQ,0.030
-weakly_supervised,SC-Net,MO->Co,AJI,0.134
-weakly_supervised,SC-Net,MO->Co,Dice,0.388
-weakly_supervised,SC-Net,MO->Co,DQ,0.186
-weakly_supervised,SC-Net,MO->Co,PQ,0.128
-weakly_supervised,SC-Net,MO->Nu,AJI,0.072
-weakly_supervised,SC-Net,MO->Nu,Dice,0.195
-weakly_supervised,SC-Net,MO->Nu,DQ,0.029
-weakly_supervised,SC-Net,MO->Nu,PQ,0.017
-weakly_supervised,SC-Net,CPM->Co,AJI,0.124
-weakly_supervised,SC-Net,CPM->Co,Dice,0.363
-weakly_supervised,SC-Net,CPM->Co,DQ,0.177
-weakly_supervised,SC-Net,CPM->Co,PQ,0.120
-weakly_supervised,SC-Net,CPM->Nu,AJI,0.146
-weakly_supervised,SC-Net,CPM->Nu,Dice,0.367
-weakly_supervised,SC-Net,CPM->Nu,DQ,0.140
-weakly_supervised,SC-Net,CPM->Nu,PQ,0.090
-weakly_supervised,SAC-Net,MO->CPM,AJI,0.377
-weakly_supervised,SAC-Net,MO->CPM,Dice,0.571
-weakly_supervised,SAC-Net,MO->CPM,DQ,0.320
-weakly_supervised,SAC-Net,MO->CPM,PQ,0.208
-weakly_supervised,SAC-Net,CPM->MO,AJI,0.290
-weakly_supervised,SAC-Net,CPM->MO,Dice,0.526
-weakly_supervised,SAC-Net,CPM->MO,DQ,0.206
-weakly_supervised,SAC-Net,CPM->MO,PQ,0.128
-weakly_supervised,SAC-Net,Co->Nu,AJI,0.043
-weakly_supervised,SAC-Net,Co->Nu,Dice,0.127
-weakly_supervised,SAC-Net,Co->Nu,DQ,0.003
-weakly_supervised,SAC-Net,Co->Nu,PQ,0.002
-weakly_supervised,SAC-Net,Nu->Co,AJI,0.057
-weakly_supervised,SAC-Net,Nu->Co,Dice,0.195
-weakly_supervised,SAC-Net,Nu->Co,DQ,0.073
-weakly_supervised,SAC-Net,Nu->Co,PQ,0.054
-weakly_supervised,SAC-Net,MO->Co,AJI,0.177
-weakly_supervised,SAC-Net,MO->Co,Dice,0.410
-weakly_supervised,SAC-Net,MO->Co,DQ,0.285
-weakly_supervised,SAC-Net,MO->Co,PQ,0.209
-weakly_supervised,SAC-Net,MO->Nu,AJI,0.225
-weakly_supervised,SAC-Net,MO->Nu,Dice,0.448
-weakly_supervised,SAC-Net,MO->Nu,DQ,0.110
-weakly_supervised,SAC-Net,MO->Nu,PQ,0.072
-weakly_supervised,SAC-Net,CPM->Co,AJI,0.228
-weakly_supervised,SAC-Net,CPM->Co,Dice,0.473
-weakly_supervised,SAC-Net,CPM->Co,DQ,0.293
-weakly_supervised,SAC-Net,CPM->Co,PQ,0.202
-weakly_supervised,SAC-Net,CPM->Nu,AJI,0.260
-weakly_supervised,SAC-Net,CPM->Nu,Dice,0.490
-weakly_supervised,SAC-Net,CPM->Nu,DQ,0.210
-weakly_supervised,SAC-Net,CPM->Nu,PQ,0.139
-weakly_supervised,BoNuS,MO->CPM,AJI,0.554
-weakly_supervised,BoNuS,MO->CPM,Dice,0.737
-weakly_supervised,BoNuS,MO->CPM,DQ,0.721
-weakly_supervised,BoNuS,MO->CPM,PQ,0.523
-weakly_supervised,BoNuS,CPM->MO,AJI,0.550
-weakly_supervised,BoNuS,CPM->MO,Dice,0.737
-weakly_supervised,BoNuS,CPM->MO,DQ,0.722
-weakly_supervised,BoNuS,CPM->MO,PQ,0.514
-weakly_supervised,BoNuS,Co->Nu,AJI,0.016
-weakly_supervised,BoNuS,Co->Nu,Dice,0.079
-weakly_supervised,BoNuS,Co->Nu,DQ,0.018
-weakly_supervised,BoNuS,Co->Nu,PQ,0.011
-weakly_supervised,BoNuS,Nu->Co,AJI,0.000
-weakly_supervised,BoNuS,Nu->Co,Dice,0.026
-weakly_supervised,BoNuS,Nu->Co,DQ,0.024
-weakly_supervised,BoNuS,Nu->Co,PQ,0.024
-weakly_supervised,BoNuS,MO->Co,AJI,0.083
-weakly_supervised,BoNuS,MO->Co,Dice,0.354
-weakly_supervised,BoNuS,MO->Co,DQ,0.166
-weakly_supervised,BoNuS,MO->Co,PQ,0.119
-weakly_supervised,BoNuS,MO->Nu,AJI,0.126
-weakly_supervised,BoNuS,MO->Nu,Dice,0.289
-weakly_supervised,BoNuS,MO->Nu,DQ,0.077
-weakly_supervised,BoNuS,MO->Nu,PQ,0.047
-weakly_supervised,BoNuS,CPM->Co,AJI,0.069
-weakly_supervised,BoNuS,CPM->Co,Dice,0.287
-weakly_supervised,BoNuS,CPM->Co,DQ,0.098
-weakly_supervised,BoNuS,CPM->Co,PQ,0.071
-weakly_supervised,BoNuS,CPM->Nu,AJI,0.192
-weakly_supervised,BoNuS,CPM->Nu,Dice,0.439
-weakly_supervised,BoNuS,CPM->Nu,DQ,0.229
-weakly_supervised,BoNuS,CPM->Nu,PQ,0.147
-weakly_supervised,WNS-PLCUD,MO->CPM,AJI,0.423
-weakly_supervised,WNS-PLCUD,MO->CPM,Dice,0.633
-weakly_supervised,WNS-PLCUD,MO->CPM,DQ,0.515
-weakly_supervised,WNS-PLCUD,MO->CPM,PQ,0.333
-weakly_supervised,WNS-PLCUD,CPM->MO,AJI,0.470
-weakly_supervised,WNS-PLCUD,CPM->MO,Dice,0.665
-weakly_supervised,WNS-PLCUD,CPM->MO,DQ,0.630
-weakly_supervised,WNS-PLCUD,CPM->MO,PQ,0.425
-weakly_supervised,WNS-PLCUD,Co->Nu,AJI,0.005
-weakly_supervised,WNS-PLCUD,Co->Nu,Dice,0.031
-weakly_supervised,WNS-PLCUD,Co->Nu,DQ,0.003
-weakly_supervised,WNS-PLCUD,Co->Nu,PQ,0.002
-weakly_supervised,WNS-PLCUD,Nu->Co,AJI,0.029
-weakly_supervised,WNS-PLCUD,Nu->Co,Dice,0.111
-weakly_supervised,WNS-PLCUD,Nu->Co,DQ,0.031
-weakly_supervised,WNS-PLCUD,Nu->Co,PQ,0.028
-weakly_supervised,WNS-PLCUD,MO->Co,AJI,0.135
-weakly_supervised,WNS-PLCUD,MO->Co,Dice,0.412
-weakly_supervised,WNS-PLCUD,MO->Co,DQ,0.174
-weakly_supervised,WNS-PLCUD,MO->Co,PQ,0.114
-weakly_supervised,WNS-PLCUD,MO->Nu,AJI,0.161
-weakly_supervised,WNS-PLCUD,MO->Nu,Dice,0.380
-weakly_supervised,WNS-PLCUD,MO->Nu,DQ,0.139
-weakly_supervised,WNS-PLCUD,MO->Nu,PQ,0.085
-weakly_supervised,WNS-PLCUD,CPM->Co,AJI,0.076
-weakly_supervised,WNS-PLCUD,CPM->Co,Dice,0.303
-weakly_supervised,WNS-PLCUD,CPM->Co,DQ,0.072
-weakly_supervised,WNS-PLCUD,CPM->Co,PQ,0.045
-weakly_supervised,WNS-PLCUD,CPM->Nu,AJI,0.244
-weakly_supervised,WNS-PLCUD,CPM->Nu,Dice,0.476
-weakly_supervised,WNS-PLCUD,CPM->Nu,DQ,0.241
-weakly_supervised,WNS-PLCUD,CPM->Nu,PQ,0.153
-weakly_supervised,DENSE,MO->CPM,AJI,0.393
-weakly_supervised,DENSE,MO->CPM,Dice,0.620
-weakly_supervised,DENSE,MO->CPM,DQ,0.452
-weakly_supervised,DENSE,MO->CPM,PQ,0.295
-weakly_supervised,DENSE,CPM->MO,AJI,0.293
-weakly_supervised,DENSE,CPM->MO,Dice,0.533
-weakly_supervised,DENSE,CPM->MO,DQ,0.315
-weakly_supervised,DENSE,CPM->MO,PQ,0.194
-weakly_supervised,DENSE,Co->Nu,AJI,0.098
-weakly_supervised,DENSE,Co->Nu,Dice,0.285
-weakly_supervised,DENSE,Co->Nu,DQ,0.109
-weakly_supervised,DENSE,Co->Nu,PQ,0.070
-weakly_supervised,DENSE,Nu->Co,AJI,0.032
-weakly_supervised,DENSE,Nu->Co,Dice,0.093
-weakly_supervised,DENSE,Nu->Co,DQ,0.025
-weakly_supervised,DENSE,Nu->Co,PQ,0.025
-weakly_supervised,DENSE,MO->Co,AJI,0.044
-weakly_supervised,DENSE,MO->Co,Dice,0.126
-weakly_supervised,DENSE,MO->Co,DQ,0.017
-weakly_supervised,DENSE,MO->Co,PQ,0.017
-weakly_supervised,DENSE,MO->Nu,AJI,0.156
-weakly_supervised,DENSE,MO->Nu,Dice,0.380
-weakly_supervised,DENSE,MO->Nu,DQ,0.190
-weakly_supervised,DENSE,MO->Nu,PQ,0.124
-weakly_supervised,DENSE,CPM->Co,AJI,0.037
-weakly_supervised,DENSE,CPM->Co,Dice,0.130
-weakly_supervised,DENSE,CPM->Co,DQ,0.010
-weakly_supervised,DENSE,CPM->Co,PQ,0.008
-weakly_supervised,DENSE,CPM->Nu,AJI,0.198
-weakly_supervised,DENSE,CPM->Nu,Dice,0.435
-weakly_supervised,DENSE,CPM->Nu,DQ,0.211
-weakly_supervised,DENSE,CPM->Nu,PQ,0.134
-weakly_supervised,SAPL,MO->CPM,AJI,0.520
-weakly_supervised,SAPL,MO->CPM,Dice,0.706
-weakly_supervised,SAPL,MO->CPM,DQ,0.680
-weakly_supervised,SAPL,MO->CPM,PQ,0.468
-weakly_supervised,SAPL,CPM->MO,AJI,0.532
-weakly_supervised,SAPL,CPM->MO,Dice,0.724
-weakly_supervised,SAPL,CPM->MO,DQ,0.703
-weakly_supervised,SAPL,CPM->MO,PQ,0.499
-weakly_supervised,SAPL,Co->Nu,AJI,0.082
-weakly_supervised,SAPL,Co->Nu,Dice,0.209
-weakly_supervised,SAPL,Co->Nu,DQ,0.055
-weakly_supervised,SAPL,Co->Nu,PQ,0.035
-weakly_supervised,SAPL,Nu->Co,AJI,0.002
-weakly_supervised,SAPL,Nu->Co,Dice,0.060
-weakly_supervised,SAPL,Nu->Co,DQ,0.023
-weakly_supervised,SAPL,Nu->Co,PQ,0.001
-weakly_supervised,SAPL,MO->Co,AJI,0.092
-weakly_supervised,SAPL,MO->Co,Dice,0.360
-weakly_supervised,SAPL,MO->Co,DQ,0.156
-weakly_supervised,SAPL,MO->Co,PQ,0.108
-weakly_supervised,SAPL,MO->Nu,AJI,0.261
-weakly_supervised,SAPL,MO->Nu,Dice,0.480
-weakly_supervised,SAPL,MO->Nu,DQ,0.234
-weakly_supervised,SAPL,MO->Nu,PQ,0.150
-weakly_supervised,SAPL,CPM->Co,AJI,0.070
-weakly_supervised,SAPL,CPM->Co,Dice,0.346
-weakly_supervised,SAPL,CPM->Co,DQ,0.140
-weakly_supervised,SAPL,CPM->Co,PQ,0.096
-weakly_supervised,SAPL,CPM->Nu,AJI,0.286
-weakly_supervised,SAPL,CPM->Nu,Dice,0.526
-weakly_supervised,SAPL,CPM->Nu,DQ,0.321
-weakly_supervised,SAPL,CPM->Nu,PQ,0.214
-weakly_supervised,PPLO,MO->CPM,AJI,0.381
-weakly_supervised,PPLO,MO->CPM,Dice,0.655
-weakly_supervised,PPLO,MO->CPM,DQ,0.564
-weakly_supervised,PPLO,MO->CPM,PQ,0.397
-weakly_supervised,PPLO,CPM->MO,AJI,0.436
-weakly_supervised,PPLO,CPM->MO,Dice,0.681
-weakly_supervised,PPLO,CPM->MO,DQ,0.622
-weakly_supervised,PPLO,CPM->MO,PQ,0.442
-weakly_supervised,PPLO,Co->Nu,AJI,0.123
-weakly_supervised,PPLO,Co->Nu,Dice,0.360
-weakly_supervised,PPLO,Co->Nu,DQ,0.133
-weakly_supervised,PPLO,Co->Nu,PQ,0.086
-weakly_supervised,PPLO,Nu->Co,AJI,0.024
-weakly_supervised,PPLO,Nu->Co,Dice,0.035
-weakly_supervised,PPLO,Nu->Co,DQ,0.024
-weakly_supervised,PPLO,Nu->Co,PQ,0.024
-weakly_supervised,PPLO,MO->Co,AJI,0.071
-weakly_supervised,PPLO,MO->Co,Dice,0.231
-weakly_supervised,PPLO,MO->Co,DQ,0.097
-weakly_supervised,PPLO,MO->Co,PQ,0.072
-weakly_supervised,PPLO,MO->Nu,AJI,0.196
-weakly_supervised,PPLO,MO->Nu,Dice,0.490
-weakly_supervised,PPLO,MO->Nu,DQ,0.298
-weakly_supervised,PPLO,MO->Nu,PQ,0.203
-weakly_supervised,PPLO,CPM->Co,AJI,0.065
-weakly_supervised,PPLO,CPM->Co,Dice,0.212
-weakly_supervised,PPLO,CPM->Co,DQ,0.059
-weakly_supervised,PPLO,CPM->Co,PQ,0.045
-weakly_supervised,PPLO,CPM->Nu,AJI,0.196
-weakly_supervised,PPLO,CPM->Nu,Dice,0.467
-weakly_supervised,PPLO,CPM->Nu,DQ,0.225
-weakly_supervised,PPLO,CPM->Nu,PQ,0.151
-weakly_supervised,ChromaFlow,MO->CPM,AJI,0.563
-weakly_supervised,ChromaFlow,MO->CPM,Dice,0.756
-weakly_supervised,ChromaFlow,MO->CPM,DQ,0.768
-weakly_supervised,ChromaFlow,MO->CPM,PQ,0.575
-weakly_supervised,ChromaFlow,CPM->MO,AJI,0.592
-weakly_supervised,ChromaFlow,CPM->MO,Dice,0.767
-weakly_supervised,ChromaFlow,CPM->MO,DQ,0.807
-weakly_supervised,ChromaFlow,CPM->MO,PQ,0.589
-weakly_supervised,ChromaFlow,Co->Nu,AJI,0.189
-weakly_supervised,ChromaFlow,Co->Nu,Dice,0.367
-weakly_supervised,ChromaFlow,Co->Nu,DQ,0.115
-weakly_supervised,ChromaFlow,Co->Nu,PQ,0.072
-weakly_supervised,ChromaFlow,Nu->Co,AJI,0.167
-weakly_supervised,ChromaFlow,Nu->Co,Dice,0.377
-weakly_supervised,ChromaFlow,Nu->Co,DQ,0.148
-weakly_supervised,ChromaFlow,Nu->Co,PQ,0.092
-weakly_supervised,ChromaFlow,MO->Co,AJI,0.318
-weakly_supervised,ChromaFlow,MO->Co,Dice,0.563
-weakly_supervised,ChromaFlow,MO->Co,DQ,0.476
-weakly_supervised,ChromaFlow,MO->Co,PQ,0.324
-weakly_supervised,ChromaFlow,MO->Nu,AJI,0.203
-weakly_supervised,ChromaFlow,MO->Nu,Dice,0.452
-weakly_supervised,ChromaFlow,MO->Nu,DQ,0.250
-weakly_supervised,ChromaFlow,MO->Nu,PQ,0.165
-weakly_supervised,ChromaFlow,CPM->Co,AJI,0.266
-weakly_supervised,ChromaFlow,CPM->Co,Dice,0.515
-weakly_supervised,ChromaFlow,CPM->Co,DQ,0.370
-weakly_supervised,ChromaFlow,CPM->Co,PQ,0.245
-weakly_supervised,ChromaFlow,CPM->Nu,AJI,0.348
-weakly_supervised,ChromaFlow,CPM->Nu,Dice,0.581
-weakly_supervised,ChromaFlow,CPM->Nu,DQ,0.415
-weakly_supervised,ChromaFlow,CPM->Nu,PQ,0.274
+fully_supervised,U-Net,MO->CPM,AJI,51.9
+fully_supervised,U-Net,MO->CPM,Dice,72.4
+fully_supervised,U-Net,MO->CPM,DQ,67.5
+fully_supervised,U-Net,MO->CPM,PQ,47.3
+fully_supervised,U-Net,CPM->MO,AJI,49.0
+fully_supervised,U-Net,CPM->MO,Dice,71.5
+fully_supervised,U-Net,CPM->MO,DQ,64.3
+fully_supervised,U-Net,CPM->MO,PQ,47.6
+fully_supervised,U-Net,Co->Nu,AJI,9.1
+fully_supervised,U-Net,Co->Nu,Dice,28.1
+fully_supervised,U-Net,Co->Nu,DQ,8.4
+fully_supervised,U-Net,Co->Nu,PQ,5.2
+fully_supervised,U-Net,Nu->Co,AJI,4.2
+fully_supervised,U-Net,Nu->Co,Dice,21.5
+fully_supervised,U-Net,Nu->Co,DQ,6.9
+fully_supervised,U-Net,Nu->Co,PQ,5.2
+fully_supervised,U-Net,MO->Co,AJI,18.3
+fully_supervised,U-Net,MO->Co,Dice,46.1
+fully_supervised,U-Net,MO->Co,DQ,30.1
+fully_supervised,U-Net,MO->Co,PQ,21.0
+fully_supervised,U-Net,MO->Nu,AJI,25.6
+fully_supervised,U-Net,MO->Nu,Dice,50.9
+fully_supervised,U-Net,MO->Nu,DQ,27.4
+fully_supervised,U-Net,MO->Nu,PQ,18.9
+fully_supervised,U-Net,CPM->Co,AJI,12.8
+fully_supervised,U-Net,CPM->Co,Dice,36.6
+fully_supervised,U-Net,CPM->Co,DQ,24.1
+fully_supervised,U-Net,CPM->Co,PQ,16.3
+fully_supervised,U-Net,CPM->Nu,AJI,27.3
+fully_supervised,U-Net,CPM->Nu,Dice,53.1
+fully_supervised,U-Net,CPM->Nu,DQ,30.0
+fully_supervised,U-Net,CPM->Nu,PQ,20.8
+fully_supervised,HoVer-Net,MO->CPM,AJI,61.8
+fully_supervised,HoVer-Net,MO->CPM,Dice,80.4
+fully_supervised,HoVer-Net,MO->CPM,DQ,80.2
+fully_supervised,HoVer-Net,MO->CPM,PQ,63.2
+fully_supervised,HoVer-Net,CPM->MO,AJI,59.9
+fully_supervised,HoVer-Net,CPM->MO,Dice,77.5
+fully_supervised,HoVer-Net,CPM->MO,DQ,79.0
+fully_supervised,HoVer-Net,CPM->MO,PQ,59.0
+fully_supervised,HoVer-Net,Co->Nu,AJI,5.1
+fully_supervised,HoVer-Net,Co->Nu,Dice,18.9
+fully_supervised,HoVer-Net,Co->Nu,DQ,4.4
+fully_supervised,HoVer-Net,Co->Nu,PQ,2.9
+fully_supervised,HoVer-Net,Nu->Co,AJI,3.5
+fully_supervised,HoVer-Net,Nu->Co,Dice,25.9
+fully_supervised,HoVer-Net,Nu->Co,DQ,7.8
+fully_supervised,HoVer-Net,Nu->Co,PQ,6.1
+fully_supervised,HoVer-Net,MO->Co,AJI,36.8
+fully_supervised,HoVer-Net,MO->Co,Dice,63.3
+fully_supervised,HoVer-Net,MO->Co,DQ,56.9
+fully_supervised,HoVer-Net,MO->Co,PQ,44.9
+fully_supervised,HoVer-Net,MO->Nu,AJI,22.2
+fully_supervised,HoVer-Net,MO->Nu,Dice,52.1
+fully_supervised,HoVer-Net,MO->Nu,DQ,37.9
+fully_supervised,HoVer-Net,MO->Nu,PQ,27.2
+fully_supervised,HoVer-Net,CPM->Co,AJI,33.2
+fully_supervised,HoVer-Net,CPM->Co,Dice,58.4
+fully_supervised,HoVer-Net,CPM->Co,DQ,50.6
+fully_supervised,HoVer-Net,CPM->Co,PQ,38.6
+fully_supervised,HoVer-Net,CPM->Nu,AJI,18.1
+fully_supervised,HoVer-Net,CPM->Nu,Dice,46.9
+fully_supervised,HoVer-Net,CPM->Nu,DQ,28.0
+fully_supervised,HoVer-Net,CPM->Nu,PQ,19.9
+foundation_model,SAM ViT-H,MO->CPM,AJI,47.0
+foundation_model,SAM ViT-H,MO->CPM,Dice,67.3
+foundation_model,SAM ViT-H,MO->CPM,DQ,58.3
+foundation_model,SAM ViT-H,MO->CPM,PQ,44.9
+foundation_model,SAM ViT-H,CPM->MO,AJI,36.6
+foundation_model,SAM ViT-H,CPM->MO,Dice,59.9
+foundation_model,SAM ViT-H,CPM->MO,DQ,62.0
+foundation_model,SAM ViT-H,CPM->MO,PQ,47.4
+foundation_model,SAM ViT-H,Co->Nu,AJI,36.1
+foundation_model,SAM ViT-H,Co->Nu,Dice,59.0
+foundation_model,SAM ViT-H,Co->Nu,DQ,50.0
+foundation_model,SAM ViT-H,Co->Nu,PQ,37.5
+foundation_model,SAM ViT-H,Nu->Co,AJI,31.7
+foundation_model,SAM ViT-H,Nu->Co,Dice,51.0
+foundation_model,SAM ViT-H,Nu->Co,DQ,48.0
+foundation_model,SAM ViT-H,Nu->Co,PQ,37.1
+foundation_model,SAM ViT-H,MO->Co,AJI,31.7
+foundation_model,SAM ViT-H,MO->Co,Dice,51.0
+foundation_model,SAM ViT-H,MO->Co,DQ,48.0
+foundation_model,SAM ViT-H,MO->Co,PQ,37.1
+foundation_model,SAM ViT-H,MO->Nu,AJI,36.1
+foundation_model,SAM ViT-H,MO->Nu,Dice,59.0
+foundation_model,SAM ViT-H,MO->Nu,DQ,50.0
+foundation_model,SAM ViT-H,MO->Nu,PQ,37.5
+foundation_model,SAM ViT-H,CPM->Co,AJI,31.7
+foundation_model,SAM ViT-H,CPM->Co,Dice,51.0
+foundation_model,SAM ViT-H,CPM->Co,DQ,48.0
+foundation_model,SAM ViT-H,CPM->Co,PQ,37.1
+foundation_model,SAM ViT-H,CPM->Nu,AJI,36.1
+foundation_model,SAM ViT-H,CPM->Nu,Dice,59.0
+foundation_model,SAM ViT-H,CPM->Nu,DQ,50.0
+foundation_model,SAM ViT-H,CPM->Nu,PQ,37.5
+foundation_model,CellViT-SAM-H,MO->CPM,AJI,60.9
+foundation_model,CellViT-SAM-H,MO->CPM,Dice,81.5
+foundation_model,CellViT-SAM-H,MO->CPM,DQ,82.7
+foundation_model,CellViT-SAM-H,MO->CPM,PQ,67.1
+foundation_model,CellViT-SAM-H,CPM->MO,AJI,65.7
+foundation_model,CellViT-SAM-H,CPM->MO,Dice,81.6
+foundation_model,CellViT-SAM-H,CPM->MO,DQ,87.1
+foundation_model,CellViT-SAM-H,CPM->MO,PQ,67.2
+foundation_model,CellViT-SAM-H,Co->Nu,AJI,30.7
+foundation_model,CellViT-SAM-H,Co->Nu,Dice,58.3
+foundation_model,CellViT-SAM-H,Co->Nu,DQ,46.7
+foundation_model,CellViT-SAM-H,Co->Nu,PQ,35.2
+foundation_model,CellViT-SAM-H,Nu->Co,AJI,34.1
+foundation_model,CellViT-SAM-H,Nu->Co,Dice,63.6
+foundation_model,CellViT-SAM-H,Nu->Co,DQ,55.0
+foundation_model,CellViT-SAM-H,Nu->Co,PQ,41.1
+foundation_model,CellViT-SAM-H,MO->Co,AJI,34.1
+foundation_model,CellViT-SAM-H,MO->Co,Dice,63.6
+foundation_model,CellViT-SAM-H,MO->Co,DQ,55.0
+foundation_model,CellViT-SAM-H,MO->Co,PQ,41.1
+foundation_model,CellViT-SAM-H,MO->Nu,AJI,30.7
+foundation_model,CellViT-SAM-H,MO->Nu,Dice,58.3
+foundation_model,CellViT-SAM-H,MO->Nu,DQ,46.7
+foundation_model,CellViT-SAM-H,MO->Nu,PQ,35.2
+foundation_model,CellViT-SAM-H,CPM->Co,AJI,34.1
+foundation_model,CellViT-SAM-H,CPM->Co,Dice,63.6
+foundation_model,CellViT-SAM-H,CPM->Co,DQ,55.0
+foundation_model,CellViT-SAM-H,CPM->Co,PQ,41.1
+foundation_model,CellViT-SAM-H,CPM->Nu,AJI,30.7
+foundation_model,CellViT-SAM-H,CPM->Nu,Dice,58.3
+foundation_model,CellViT-SAM-H,CPM->Nu,DQ,46.7
+foundation_model,CellViT-SAM-H,CPM->Nu,PQ,35.2
+foundation_model,Cellpose 3,MO->CPM,AJI,30.1
+foundation_model,Cellpose 3,MO->CPM,Dice,48.7
+foundation_model,Cellpose 3,MO->CPM,DQ,44.7
+foundation_model,Cellpose 3,MO->CPM,PQ,31.3
+foundation_model,Cellpose 3,CPM->MO,AJI,27.4
+foundation_model,Cellpose 3,CPM->MO,Dice,48.5
+foundation_model,Cellpose 3,CPM->MO,DQ,43.1
+foundation_model,Cellpose 3,CPM->MO,PQ,29.5
+foundation_model,Cellpose 3,Co->Nu,AJI,25.2
+foundation_model,Cellpose 3,Co->Nu,Dice,50.6
+foundation_model,Cellpose 3,Co->Nu,DQ,39.6
+foundation_model,Cellpose 3,Co->Nu,PQ,29.1
+foundation_model,Cellpose 3,Nu->Co,AJI,15.4
+foundation_model,Cellpose 3,Nu->Co,Dice,33.1
+foundation_model,Cellpose 3,Nu->Co,DQ,22.4
+foundation_model,Cellpose 3,Nu->Co,PQ,15.0
+foundation_model,Cellpose 3,MO->Co,AJI,15.4
+foundation_model,Cellpose 3,MO->Co,Dice,33.1
+foundation_model,Cellpose 3,MO->Co,DQ,22.4
+foundation_model,Cellpose 3,MO->Co,PQ,15.0
+foundation_model,Cellpose 3,MO->Nu,AJI,25.2
+foundation_model,Cellpose 3,MO->Nu,Dice,50.6
+foundation_model,Cellpose 3,MO->Nu,DQ,39.6
+foundation_model,Cellpose 3,MO->Nu,PQ,29.1
+foundation_model,Cellpose 3,CPM->Co,AJI,15.4
+foundation_model,Cellpose 3,CPM->Co,Dice,33.1
+foundation_model,Cellpose 3,CPM->Co,DQ,22.4
+foundation_model,Cellpose 3,CPM->Co,PQ,15.0
+foundation_model,Cellpose 3,CPM->Nu,AJI,25.2
+foundation_model,Cellpose 3,CPM->Nu,Dice,50.6
+foundation_model,Cellpose 3,CPM->Nu,DQ,39.6
+foundation_model,Cellpose 3,CPM->Nu,PQ,29.1
+foundation_model,SAM 2.1,MO->CPM,AJI,24.6
+foundation_model,SAM 2.1,MO->CPM,Dice,63.7
+foundation_model,SAM 2.1,MO->CPM,DQ,61.8
+foundation_model,SAM 2.1,MO->CPM,PQ,49.3
+foundation_model,SAM 2.1,CPM->MO,AJI,2.5
+foundation_model,SAM 2.1,CPM->MO,Dice,29.6
+foundation_model,SAM 2.1,CPM->MO,DQ,22.9
+foundation_model,SAM 2.1,CPM->MO,PQ,18.0
+foundation_model,SAM 2.1,Co->Nu,AJI,18.2
+foundation_model,SAM 2.1,Co->Nu,Dice,53.5
+foundation_model,SAM 2.1,Co->Nu,DQ,43.9
+foundation_model,SAM 2.1,Co->Nu,PQ,33.7
+foundation_model,SAM 2.1,Nu->Co,AJI,9.6
+foundation_model,SAM 2.1,Nu->Co,Dice,37.4
+foundation_model,SAM 2.1,Nu->Co,DQ,37.7
+foundation_model,SAM 2.1,Nu->Co,PQ,29.6
+foundation_model,SAM 2.1,MO->Co,AJI,9.6
+foundation_model,SAM 2.1,MO->Co,Dice,37.4
+foundation_model,SAM 2.1,MO->Co,DQ,37.7
+foundation_model,SAM 2.1,MO->Co,PQ,29.6
+foundation_model,SAM 2.1,MO->Nu,AJI,18.2
+foundation_model,SAM 2.1,MO->Nu,Dice,53.5
+foundation_model,SAM 2.1,MO->Nu,DQ,43.9
+foundation_model,SAM 2.1,MO->Nu,PQ,33.7
+foundation_model,SAM 2.1,CPM->Co,AJI,9.6
+foundation_model,SAM 2.1,CPM->Co,Dice,37.4
+foundation_model,SAM 2.1,CPM->Co,DQ,37.7
+foundation_model,SAM 2.1,CPM->Co,PQ,29.6
+foundation_model,SAM 2.1,CPM->Nu,AJI,18.2
+foundation_model,SAM 2.1,CPM->Nu,Dice,53.5
+foundation_model,SAM 2.1,CPM->Nu,DQ,43.9
+foundation_model,SAM 2.1,CPM->Nu,PQ,33.7
+foundation_model,PathoSAM,MO->CPM,AJI,63.2
+foundation_model,PathoSAM,MO->CPM,Dice,80.7
+foundation_model,PathoSAM,MO->CPM,DQ,72.8
+foundation_model,PathoSAM,MO->CPM,PQ,58.3
+foundation_model,PathoSAM,CPM->MO,AJI,41.6
+foundation_model,PathoSAM,CPM->MO,Dice,71.2
+foundation_model,PathoSAM,CPM->MO,DQ,71.3
+foundation_model,PathoSAM,CPM->MO,PQ,54.1
+foundation_model,PathoSAM,Co->Nu,AJI,39.7
+foundation_model,PathoSAM,Co->Nu,Dice,63.6
+foundation_model,PathoSAM,Co->Nu,DQ,41.7
+foundation_model,PathoSAM,Co->Nu,PQ,29.9
+foundation_model,PathoSAM,Nu->Co,AJI,45.5
+foundation_model,PathoSAM,Nu->Co,Dice,66.3
+foundation_model,PathoSAM,Nu->Co,DQ,48.0
+foundation_model,PathoSAM,Nu->Co,PQ,37.3
+foundation_model,PathoSAM,MO->Co,AJI,45.5
+foundation_model,PathoSAM,MO->Co,Dice,66.3
+foundation_model,PathoSAM,MO->Co,DQ,48.0
+foundation_model,PathoSAM,MO->Co,PQ,37.3
+foundation_model,PathoSAM,MO->Nu,AJI,39.7
+foundation_model,PathoSAM,MO->Nu,Dice,63.6
+foundation_model,PathoSAM,MO->Nu,DQ,41.7
+foundation_model,PathoSAM,MO->Nu,PQ,29.9
+foundation_model,PathoSAM,CPM->Co,AJI,45.5
+foundation_model,PathoSAM,CPM->Co,Dice,66.3
+foundation_model,PathoSAM,CPM->Co,DQ,48.0
+foundation_model,PathoSAM,CPM->Co,PQ,37.3
+foundation_model,PathoSAM,CPM->Nu,AJI,39.7
+foundation_model,PathoSAM,CPM->Nu,Dice,63.6
+foundation_model,PathoSAM,CPM->Nu,DQ,41.7
+foundation_model,PathoSAM,CPM->Nu,PQ,29.9
+weakly_supervised,Qu,MO->CPM,AJI,45.4
+weakly_supervised,Qu,MO->CPM,Dice,65.4
+weakly_supervised,Qu,MO->CPM,DQ,56.8
+weakly_supervised,Qu,MO->CPM,PQ,37.8
+weakly_supervised,Qu,CPM->MO,AJI,56.4
+weakly_supervised,Qu,CPM->MO,Dice,74.0
+weakly_supervised,Qu,CPM->MO,DQ,73.3
+weakly_supervised,Qu,CPM->MO,PQ,51.7
+weakly_supervised,Qu,Co->Nu,AJI,13.1
+weakly_supervised,Qu,Co->Nu,Dice,27.5
+weakly_supervised,Qu,Co->Nu,DQ,6.8
+weakly_supervised,Qu,Co->Nu,PQ,4.3
+weakly_supervised,Qu,Nu->Co,AJI,2.2
+weakly_supervised,Qu,Nu->Co,Dice,15.2
+weakly_supervised,Qu,Nu->Co,DQ,3.3
+weakly_supervised,Qu,Nu->Co,PQ,2.9
+weakly_supervised,Qu,MO->Co,AJI,20.1
+weakly_supervised,Qu,MO->Co,Dice,43.1
+weakly_supervised,Qu,MO->Co,DQ,26.6
+weakly_supervised,Qu,MO->Co,PQ,18.1
+weakly_supervised,Qu,MO->Nu,AJI,15.8
+weakly_supervised,Qu,MO->Nu,Dice,40.4
+weakly_supervised,Qu,MO->Nu,DQ,19.1
+weakly_supervised,Qu,MO->Nu,PQ,12.2
+weakly_supervised,Qu,CPM->Co,AJI,21.7
+weakly_supervised,Qu,CPM->Co,Dice,44.8
+weakly_supervised,Qu,CPM->Co,DQ,28.3
+weakly_supervised,Qu,CPM->Co,PQ,19.5
+weakly_supervised,Qu,CPM->Nu,AJI,29.1
+weakly_supervised,Qu,CPM->Nu,Dice,54.8
+weakly_supervised,Qu,CPM->Nu,DQ,33.9
+weakly_supervised,Qu,CPM->Nu,PQ,22.8
+weakly_supervised,Scribble2Label,MO->CPM,AJI,44.3
+weakly_supervised,Scribble2Label,MO->CPM,Dice,63.6
+weakly_supervised,Scribble2Label,MO->CPM,DQ,30.3
+weakly_supervised,Scribble2Label,MO->CPM,PQ,20.2
+weakly_supervised,Scribble2Label,CPM->MO,AJI,47.4
+weakly_supervised,Scribble2Label,CPM->MO,Dice,66.2
+weakly_supervised,Scribble2Label,CPM->MO,DQ,47.4
+weakly_supervised,Scribble2Label,CPM->MO,PQ,32.2
+weakly_supervised,Scribble2Label,Co->Nu,AJI,17.2
+weakly_supervised,Scribble2Label,Co->Nu,Dice,35.1
+weakly_supervised,Scribble2Label,Co->Nu,DQ,6.7
+weakly_supervised,Scribble2Label,Co->Nu,PQ,4.2
+weakly_supervised,Scribble2Label,Nu->Co,AJI,8.5
+weakly_supervised,Scribble2Label,Nu->Co,Dice,25.9
+weakly_supervised,Scribble2Label,Nu->Co,DQ,5.1
+weakly_supervised,Scribble2Label,Nu->Co,PQ,3.2
+weakly_supervised,Scribble2Label,MO->Co,AJI,8.3
+weakly_supervised,Scribble2Label,MO->Co,Dice,31.7
+weakly_supervised,Scribble2Label,MO->Co,DQ,8.4
+weakly_supervised,Scribble2Label,MO->Co,PQ,5.7
+weakly_supervised,Scribble2Label,MO->Nu,AJI,17.0
+weakly_supervised,Scribble2Label,MO->Nu,Dice,35.3
+weakly_supervised,Scribble2Label,MO->Nu,DQ,9.4
+weakly_supervised,Scribble2Label,MO->Nu,PQ,5.9
+weakly_supervised,Scribble2Label,CPM->Co,AJI,18.7
+weakly_supervised,Scribble2Label,CPM->Co,Dice,40.3
+weakly_supervised,Scribble2Label,CPM->Co,DQ,17.6
+weakly_supervised,Scribble2Label,CPM->Co,PQ,11.2
+weakly_supervised,Scribble2Label,CPM->Nu,AJI,22.0
+weakly_supervised,Scribble2Label,CPM->Nu,Dice,43.9
+weakly_supervised,Scribble2Label,CPM->Nu,DQ,10.2
+weakly_supervised,Scribble2Label,CPM->Nu,PQ,6.6
+weakly_supervised,SPN+IEN,MO->CPM,AJI,51.8
+weakly_supervised,SPN+IEN,MO->CPM,Dice,71.1
+weakly_supervised,SPN+IEN,MO->CPM,DQ,60.1
+weakly_supervised,SPN+IEN,MO->CPM,PQ,42.8
+weakly_supervised,SPN+IEN,CPM->MO,AJI,53.5
+weakly_supervised,SPN+IEN,CPM->MO,Dice,70.6
+weakly_supervised,SPN+IEN,CPM->MO,DQ,69.2
+weakly_supervised,SPN+IEN,CPM->MO,PQ,47.7
+weakly_supervised,SPN+IEN,Co->Nu,AJI,0.5
+weakly_supervised,SPN+IEN,Co->Nu,Dice,3.1
+weakly_supervised,SPN+IEN,Co->Nu,DQ,0.3
+weakly_supervised,SPN+IEN,Co->Nu,PQ,0.2
+weakly_supervised,SPN+IEN,Nu->Co,AJI,3.5
+weakly_supervised,SPN+IEN,Nu->Co,Dice,12.2
+weakly_supervised,SPN+IEN,Nu->Co,DQ,3.0
+weakly_supervised,SPN+IEN,Nu->Co,PQ,2.8
+weakly_supervised,SPN+IEN,MO->Co,AJI,21.5
+weakly_supervised,SPN+IEN,MO->Co,Dice,47.3
+weakly_supervised,SPN+IEN,MO->Co,DQ,31.1
+weakly_supervised,SPN+IEN,MO->Co,PQ,20.5
+weakly_supervised,SPN+IEN,MO->Nu,AJI,25.9
+weakly_supervised,SPN+IEN,MO->Nu,Dice,50.5
+weakly_supervised,SPN+IEN,MO->Nu,DQ,14.9
+weakly_supervised,SPN+IEN,MO->Nu,PQ,10.3
+weakly_supervised,SPN+IEN,CPM->Co,AJI,20.3
+weakly_supervised,SPN+IEN,CPM->Co,Dice,45.9
+weakly_supervised,SPN+IEN,CPM->Co,DQ,29.2
+weakly_supervised,SPN+IEN,CPM->Co,PQ,19.2
+weakly_supervised,SPN+IEN,CPM->Nu,AJI,28.7
+weakly_supervised,SPN+IEN,CPM->Nu,Dice,52.8
+weakly_supervised,SPN+IEN,CPM->Nu,DQ,33.1
+weakly_supervised,SPN+IEN,CPM->Nu,PQ,21.8
+weakly_supervised,SC-Net,MO->CPM,AJI,41.5
+weakly_supervised,SC-Net,MO->CPM,Dice,61.6
+weakly_supervised,SC-Net,MO->CPM,DQ,47.9
+weakly_supervised,SC-Net,MO->CPM,PQ,30.9
+weakly_supervised,SC-Net,CPM->MO,AJI,50.0
+weakly_supervised,SC-Net,CPM->MO,Dice,70.8
+weakly_supervised,SC-Net,CPM->MO,DQ,66.4
+weakly_supervised,SC-Net,CPM->MO,PQ,46.6
+weakly_supervised,SC-Net,Co->Nu,AJI,9.0
+weakly_supervised,SC-Net,Co->Nu,Dice,17.7
+weakly_supervised,SC-Net,Co->Nu,DQ,1.7
+weakly_supervised,SC-Net,Co->Nu,PQ,1.0
+weakly_supervised,SC-Net,Nu->Co,AJI,2.7
+weakly_supervised,SC-Net,Nu->Co,Dice,17.9
+weakly_supervised,SC-Net,Nu->Co,DQ,3.6
+weakly_supervised,SC-Net,Nu->Co,PQ,3.0
+weakly_supervised,SC-Net,MO->Co,AJI,13.4
+weakly_supervised,SC-Net,MO->Co,Dice,38.8
+weakly_supervised,SC-Net,MO->Co,DQ,18.6
+weakly_supervised,SC-Net,MO->Co,PQ,12.8
+weakly_supervised,SC-Net,MO->Nu,AJI,7.2
+weakly_supervised,SC-Net,MO->Nu,Dice,19.5
+weakly_supervised,SC-Net,MO->Nu,DQ,2.9
+weakly_supervised,SC-Net,MO->Nu,PQ,1.7
+weakly_supervised,SC-Net,CPM->Co,AJI,12.4
+weakly_supervised,SC-Net,CPM->Co,Dice,36.3
+weakly_supervised,SC-Net,CPM->Co,DQ,17.7
+weakly_supervised,SC-Net,CPM->Co,PQ,12.0
+weakly_supervised,SC-Net,CPM->Nu,AJI,14.6
+weakly_supervised,SC-Net,CPM->Nu,Dice,36.7
+weakly_supervised,SC-Net,CPM->Nu,DQ,14.0
+weakly_supervised,SC-Net,CPM->Nu,PQ,9.0
+weakly_supervised,SAC-Net,MO->CPM,AJI,37.7
+weakly_supervised,SAC-Net,MO->CPM,Dice,57.1
+weakly_supervised,SAC-Net,MO->CPM,DQ,32.0
+weakly_supervised,SAC-Net,MO->CPM,PQ,20.8
+weakly_supervised,SAC-Net,CPM->MO,AJI,29.0
+weakly_supervised,SAC-Net,CPM->MO,Dice,52.6
+weakly_supervised,SAC-Net,CPM->MO,DQ,20.6
+weakly_supervised,SAC-Net,CPM->MO,PQ,12.8
+weakly_supervised,SAC-Net,Co->Nu,AJI,4.3
+weakly_supervised,SAC-Net,Co->Nu,Dice,12.7
+weakly_supervised,SAC-Net,Co->Nu,DQ,0.3
+weakly_supervised,SAC-Net,Co->Nu,PQ,0.2
+weakly_supervised,SAC-Net,Nu->Co,AJI,5.7
+weakly_supervised,SAC-Net,Nu->Co,Dice,19.5
+weakly_supervised,SAC-Net,Nu->Co,DQ,7.3
+weakly_supervised,SAC-Net,Nu->Co,PQ,5.4
+weakly_supervised,SAC-Net,MO->Co,AJI,17.7
+weakly_supervised,SAC-Net,MO->Co,Dice,41.0
+weakly_supervised,SAC-Net,MO->Co,DQ,28.5
+weakly_supervised,SAC-Net,MO->Co,PQ,20.9
+weakly_supervised,SAC-Net,MO->Nu,AJI,22.5
+weakly_supervised,SAC-Net,MO->Nu,Dice,44.8
+weakly_supervised,SAC-Net,MO->Nu,DQ,11.0
+weakly_supervised,SAC-Net,MO->Nu,PQ,7.2
+weakly_supervised,SAC-Net,CPM->Co,AJI,22.8
+weakly_supervised,SAC-Net,CPM->Co,Dice,47.3
+weakly_supervised,SAC-Net,CPM->Co,DQ,29.3
+weakly_supervised,SAC-Net,CPM->Co,PQ,20.2
+weakly_supervised,SAC-Net,CPM->Nu,AJI,26.0
+weakly_supervised,SAC-Net,CPM->Nu,Dice,49.0
+weakly_supervised,SAC-Net,CPM->Nu,DQ,21.0
+weakly_supervised,SAC-Net,CPM->Nu,PQ,13.9
+weakly_supervised,BoNuS,MO->CPM,AJI,55.4
+weakly_supervised,BoNuS,MO->CPM,Dice,73.7
+weakly_supervised,BoNuS,MO->CPM,DQ,72.1
+weakly_supervised,BoNuS,MO->CPM,PQ,52.3
+weakly_supervised,BoNuS,CPM->MO,AJI,55.0
+weakly_supervised,BoNuS,CPM->MO,Dice,73.7
+weakly_supervised,BoNuS,CPM->MO,DQ,72.2
+weakly_supervised,BoNuS,CPM->MO,PQ,51.4
+weakly_supervised,BoNuS,Co->Nu,AJI,1.6
+weakly_supervised,BoNuS,Co->Nu,Dice,7.9
+weakly_supervised,BoNuS,Co->Nu,DQ,1.8
+weakly_supervised,BoNuS,Co->Nu,PQ,1.1
+weakly_supervised,BoNuS,Nu->Co,AJI,0.0
+weakly_supervised,BoNuS,Nu->Co,Dice,2.6
+weakly_supervised,BoNuS,Nu->Co,DQ,2.4
+weakly_supervised,BoNuS,Nu->Co,PQ,2.4
+weakly_supervised,BoNuS,MO->Co,AJI,8.3
+weakly_supervised,BoNuS,MO->Co,Dice,35.4
+weakly_supervised,BoNuS,MO->Co,DQ,16.6
+weakly_supervised,BoNuS,MO->Co,PQ,11.9
+weakly_supervised,BoNuS,MO->Nu,AJI,12.6
+weakly_supervised,BoNuS,MO->Nu,Dice,28.9
+weakly_supervised,BoNuS,MO->Nu,DQ,7.7
+weakly_supervised,BoNuS,MO->Nu,PQ,4.7
+weakly_supervised,BoNuS,CPM->Co,AJI,6.9
+weakly_supervised,BoNuS,CPM->Co,Dice,28.7
+weakly_supervised,BoNuS,CPM->Co,DQ,9.8
+weakly_supervised,BoNuS,CPM->Co,PQ,7.1
+weakly_supervised,BoNuS,CPM->Nu,AJI,19.2
+weakly_supervised,BoNuS,CPM->Nu,Dice,43.9
+weakly_supervised,BoNuS,CPM->Nu,DQ,22.9
+weakly_supervised,BoNuS,CPM->Nu,PQ,14.7
+weakly_supervised,WNS-PLCUD,MO->CPM,AJI,42.3
+weakly_supervised,WNS-PLCUD,MO->CPM,Dice,63.3
+weakly_supervised,WNS-PLCUD,MO->CPM,DQ,51.5
+weakly_supervised,WNS-PLCUD,MO->CPM,PQ,33.3
+weakly_supervised,WNS-PLCUD,CPM->MO,AJI,47.0
+weakly_supervised,WNS-PLCUD,CPM->MO,Dice,66.5
+weakly_supervised,WNS-PLCUD,CPM->MO,DQ,63.0
+weakly_supervised,WNS-PLCUD,CPM->MO,PQ,42.5
+weakly_supervised,WNS-PLCUD,Co->Nu,AJI,0.5
+weakly_supervised,WNS-PLCUD,Co->Nu,Dice,3.1
+weakly_supervised,WNS-PLCUD,Co->Nu,DQ,0.3
+weakly_supervised,WNS-PLCUD,Co->Nu,PQ,0.2
+weakly_supervised,WNS-PLCUD,Nu->Co,AJI,2.9
+weakly_supervised,WNS-PLCUD,Nu->Co,Dice,11.1
+weakly_supervised,WNS-PLCUD,Nu->Co,DQ,3.1
+weakly_supervised,WNS-PLCUD,Nu->Co,PQ,2.8
+weakly_supervised,WNS-PLCUD,MO->Co,AJI,13.5
+weakly_supervised,WNS-PLCUD,MO->Co,Dice,41.2
+weakly_supervised,WNS-PLCUD,MO->Co,DQ,17.4
+weakly_supervised,WNS-PLCUD,MO->Co,PQ,11.4
+weakly_supervised,WNS-PLCUD,MO->Nu,AJI,16.1
+weakly_supervised,WNS-PLCUD,MO->Nu,Dice,38.0
+weakly_supervised,WNS-PLCUD,MO->Nu,DQ,13.9
+weakly_supervised,WNS-PLCUD,MO->Nu,PQ,8.5
+weakly_supervised,WNS-PLCUD,CPM->Co,AJI,7.6
+weakly_supervised,WNS-PLCUD,CPM->Co,Dice,30.3
+weakly_supervised,WNS-PLCUD,CPM->Co,DQ,7.2
+weakly_supervised,WNS-PLCUD,CPM->Co,PQ,4.5
+weakly_supervised,WNS-PLCUD,CPM->Nu,AJI,24.4
+weakly_supervised,WNS-PLCUD,CPM->Nu,Dice,47.6
+weakly_supervised,WNS-PLCUD,CPM->Nu,DQ,24.1
+weakly_supervised,WNS-PLCUD,CPM->Nu,PQ,15.3
+weakly_supervised,DENSE,MO->CPM,AJI,39.3
+weakly_supervised,DENSE,MO->CPM,Dice,62.0
+weakly_supervised,DENSE,MO->CPM,DQ,45.2
+weakly_supervised,DENSE,MO->CPM,PQ,29.5
+weakly_supervised,DENSE,CPM->MO,AJI,29.3
+weakly_supervised,DENSE,CPM->MO,Dice,53.3
+weakly_supervised,DENSE,CPM->MO,DQ,31.5
+weakly_supervised,DENSE,CPM->MO,PQ,19.4
+weakly_supervised,DENSE,Co->Nu,AJI,9.8
+weakly_supervised,DENSE,Co->Nu,Dice,28.5
+weakly_supervised,DENSE,Co->Nu,DQ,10.9
+weakly_supervised,DENSE,Co->Nu,PQ,7.0
+weakly_supervised,DENSE,Nu->Co,AJI,3.2
+weakly_supervised,DENSE,Nu->Co,Dice,9.3
+weakly_supervised,DENSE,Nu->Co,DQ,2.5
+weakly_supervised,DENSE,Nu->Co,PQ,2.5
+weakly_supervised,DENSE,MO->Co,AJI,4.4
+weakly_supervised,DENSE,MO->Co,Dice,12.6
+weakly_supervised,DENSE,MO->Co,DQ,1.7
+weakly_supervised,DENSE,MO->Co,PQ,1.7
+weakly_supervised,DENSE,MO->Nu,AJI,15.6
+weakly_supervised,DENSE,MO->Nu,Dice,38.0
+weakly_supervised,DENSE,MO->Nu,DQ,19.0
+weakly_supervised,DENSE,MO->Nu,PQ,12.4
+weakly_supervised,DENSE,CPM->Co,AJI,3.7
+weakly_supervised,DENSE,CPM->Co,Dice,13.0
+weakly_supervised,DENSE,CPM->Co,DQ,1.0
+weakly_supervised,DENSE,CPM->Co,PQ,0.8
+weakly_supervised,DENSE,CPM->Nu,AJI,19.8
+weakly_supervised,DENSE,CPM->Nu,Dice,43.5
+weakly_supervised,DENSE,CPM->Nu,DQ,21.1
+weakly_supervised,DENSE,CPM->Nu,PQ,13.4
+weakly_supervised,SAPL,MO->CPM,AJI,52.0
+weakly_supervised,SAPL,MO->CPM,Dice,70.6
+weakly_supervised,SAPL,MO->CPM,DQ,68.0
+weakly_supervised,SAPL,MO->CPM,PQ,46.8
+weakly_supervised,SAPL,CPM->MO,AJI,53.2
+weakly_supervised,SAPL,CPM->MO,Dice,72.4
+weakly_supervised,SAPL,CPM->MO,DQ,70.3
+weakly_supervised,SAPL,CPM->MO,PQ,49.9
+weakly_supervised,SAPL,Co->Nu,AJI,8.2
+weakly_supervised,SAPL,Co->Nu,Dice,20.9
+weakly_supervised,SAPL,Co->Nu,DQ,5.5
+weakly_supervised,SAPL,Co->Nu,PQ,3.5
+weakly_supervised,SAPL,Nu->Co,AJI,0.2
+weakly_supervised,SAPL,Nu->Co,Dice,6.0
+weakly_supervised,SAPL,Nu->Co,DQ,2.3
+weakly_supervised,SAPL,Nu->Co,PQ,0.1
+weakly_supervised,SAPL,MO->Co,AJI,9.2
+weakly_supervised,SAPL,MO->Co,Dice,36.0
+weakly_supervised,SAPL,MO->Co,DQ,15.6
+weakly_supervised,SAPL,MO->Co,PQ,10.8
+weakly_supervised,SAPL,MO->Nu,AJI,26.1
+weakly_supervised,SAPL,MO->Nu,Dice,48.0
+weakly_supervised,SAPL,MO->Nu,DQ,23.4
+weakly_supervised,SAPL,MO->Nu,PQ,15.0
+weakly_supervised,SAPL,CPM->Co,AJI,7.0
+weakly_supervised,SAPL,CPM->Co,Dice,34.6
+weakly_supervised,SAPL,CPM->Co,DQ,14.0
+weakly_supervised,SAPL,CPM->Co,PQ,9.6
+weakly_supervised,SAPL,CPM->Nu,AJI,28.6
+weakly_supervised,SAPL,CPM->Nu,Dice,52.6
+weakly_supervised,SAPL,CPM->Nu,DQ,32.1
+weakly_supervised,SAPL,CPM->Nu,PQ,21.4
+weakly_supervised,PPLO,MO->CPM,AJI,38.1
+weakly_supervised,PPLO,MO->CPM,Dice,65.5
+weakly_supervised,PPLO,MO->CPM,DQ,56.4
+weakly_supervised,PPLO,MO->CPM,PQ,39.7
+weakly_supervised,PPLO,CPM->MO,AJI,43.6
+weakly_supervised,PPLO,CPM->MO,Dice,68.1
+weakly_supervised,PPLO,CPM->MO,DQ,62.2
+weakly_supervised,PPLO,CPM->MO,PQ,44.2
+weakly_supervised,PPLO,Co->Nu,AJI,12.3
+weakly_supervised,PPLO,Co->Nu,Dice,36.0
+weakly_supervised,PPLO,Co->Nu,DQ,13.3
+weakly_supervised,PPLO,Co->Nu,PQ,8.6
+weakly_supervised,PPLO,Nu->Co,AJI,2.4
+weakly_supervised,PPLO,Nu->Co,Dice,3.5
+weakly_supervised,PPLO,Nu->Co,DQ,2.4
+weakly_supervised,PPLO,Nu->Co,PQ,2.4
+weakly_supervised,PPLO,MO->Co,AJI,7.1
+weakly_supervised,PPLO,MO->Co,Dice,23.1
+weakly_supervised,PPLO,MO->Co,DQ,9.7
+weakly_supervised,PPLO,MO->Co,PQ,7.2
+weakly_supervised,PPLO,MO->Nu,AJI,19.6
+weakly_supervised,PPLO,MO->Nu,Dice,49.0
+weakly_supervised,PPLO,MO->Nu,DQ,29.8
+weakly_supervised,PPLO,MO->Nu,PQ,20.3
+weakly_supervised,PPLO,CPM->Co,AJI,6.5
+weakly_supervised,PPLO,CPM->Co,Dice,21.2
+weakly_supervised,PPLO,CPM->Co,DQ,5.9
+weakly_supervised,PPLO,CPM->Co,PQ,4.5
+weakly_supervised,PPLO,CPM->Nu,AJI,19.6
+weakly_supervised,PPLO,CPM->Nu,Dice,46.7
+weakly_supervised,PPLO,CPM->Nu,DQ,22.5
+weakly_supervised,PPLO,CPM->Nu,PQ,15.1
+weakly_supervised,ChromaFlow,MO->CPM,AJI,56.3
+weakly_supervised,ChromaFlow,MO->CPM,Dice,75.6
+weakly_supervised,ChromaFlow,MO->CPM,DQ,76.8
+weakly_supervised,ChromaFlow,MO->CPM,PQ,57.5
+weakly_supervised,ChromaFlow,CPM->MO,AJI,59.2
+weakly_supervised,ChromaFlow,CPM->MO,Dice,76.7
+weakly_supervised,ChromaFlow,CPM->MO,DQ,80.7
+weakly_supervised,ChromaFlow,CPM->MO,PQ,58.9
+weakly_supervised,ChromaFlow,Co->Nu,AJI,18.9
+weakly_supervised,ChromaFlow,Co->Nu,Dice,36.7
+weakly_supervised,ChromaFlow,Co->Nu,DQ,11.5
+weakly_supervised,ChromaFlow,Co->Nu,PQ,7.2
+weakly_supervised,ChromaFlow,Nu->Co,AJI,16.7
+weakly_supervised,ChromaFlow,Nu->Co,Dice,37.7
+weakly_supervised,ChromaFlow,Nu->Co,DQ,14.8
+weakly_supervised,ChromaFlow,Nu->Co,PQ,9.2
+weakly_supervised,ChromaFlow,MO->Co,AJI,31.8
+weakly_supervised,ChromaFlow,MO->Co,Dice,56.3
+weakly_supervised,ChromaFlow,MO->Co,DQ,47.6
+weakly_supervised,ChromaFlow,MO->Co,PQ,32.4
+weakly_supervised,ChromaFlow,MO->Nu,AJI,20.3
+weakly_supervised,ChromaFlow,MO->Nu,Dice,45.2
+weakly_supervised,ChromaFlow,MO->Nu,DQ,25.0
+weakly_supervised,ChromaFlow,MO->Nu,PQ,16.5
+weakly_supervised,ChromaFlow,CPM->Co,AJI,26.6
+weakly_supervised,ChromaFlow,CPM->Co,Dice,51.5
+weakly_supervised,ChromaFlow,CPM->Co,DQ,37.0
+weakly_supervised,ChromaFlow,CPM->Co,PQ,24.5
+weakly_supervised,ChromaFlow,CPM->Nu,AJI,34.8
+weakly_supervised,ChromaFlow,CPM->Nu,Dice,58.1
+weakly_supervised,ChromaFlow,CPM->Nu,DQ,41.5
+weakly_supervised,ChromaFlow,CPM->Nu,PQ,27.4

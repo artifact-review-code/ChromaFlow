@@ -1,65 +1,61 @@
-# Method and workflow
+# ChromaFlow method
 
-## Problem setting
+ChromaFlow combines **Divergence-Sink Flow (DSF)** and
+**Chromophore-Anchored Recovery (CAR)** with fixed point-derived coarse labels.
+A ResNet-34 U-Net predicts foreground logits, centerness logits and scalar
+potential phi. The flow is `v = -grad(phi)`.
 
-The training annotation is one interior point per nucleus. A point establishes location but does not specify nuclear extent or the boundary between touching nuclei. ChromaFlow treats these as two complementary recovery problems:
+## Fixed supervision
 
-1. **instance assignment**, addressed by Divergence-Sink Flow (DSF); and
-2. **nuclear support**, addressed by Chromatic Anchor Regularization (CAR).
+Training uses RGB, retained point positions and their derived targets.
+The cluster map labels background=0, foreground=1 and ignore=2. Preparation
+uses RGB/point-distance K-means within Voronoi cells and disk(2) refinement;
+see [exact implementation conventions](DATA_FORMAT.md). The map is fixed.
 
-![Paper method figure](../assets/paper/figure2_architecture.png)
+## Divergence-Sink Flow
 
-## Training flow
+The direction target at pixel r is `(p_nearest-r)/250`, with both magnitude and
+direction preserved. `L_flow` averages squared errors over two components and
+weak-foreground pixels. It is not a Gaussian-weighted direction target.
+The independent Gaussian source is `rho(r)=max_i exp(-||r-p_i||^2/(2*3^2))`.
+The screened-Poisson residual is `div(v)+rho+kappa^2*phi`, kappa=0.1.
+Since v=-grad(phi), zero residual gives `(Delta-kappa^2)*phi=rho`.
+`L_div` averages its squared residual over weak foreground.
 
-```mermaid
-flowchart TD
-    I["RGB patch, 224 x 224"] --> E["ImageNet-pretrained ResNet-34 U-Net"]
-    P["Point annotations"] --> Q["RGB + point-distance K-means"]
-    Q --> W["Voronoi assignment and 2 px refinement"]
-    W --> C["Fixed cluster map: foreground / background / ignore"]
-    E --> FG["Foreground logits"]
-    E --> CE["Centerness logits"]
-    E --> PHI["Scalar potential phi"]
-    PHI --> FLOW["v = -grad(phi)"]
-    P --> GAUSS["Gaussian centerness and sink targets"]
-    C --> BASE["Foreground + point losses"]
-    GAUSS --> DSF["Local flow + screened-Poisson divergence losses"]
-    I --> HED["Robust per-image H&E concentrations"]
-    HED --> CAR["Positive H and negative E anchors in ignore band"]
-    FG --> TOTAL["Weighted total objective"]
-    CE --> TOTAL
-    FLOW --> TOTAL
-    BASE --> TOTAL
-    DSF --> TOTAL
-    CAR --> TOTAL
-```
+## Chromophore-Anchored Recovery
 
-### Static point-derived supervision
+Fixed HED deconvolution extracts hematoxylin H and eosin E. First/99th-percentile
+normalization uses all prepared-image pixels and epsilon=1e-6. After augmentation
+and cropping, per-crop min-max normalization uses the same epsilon.
+Scores are `q_plus=H` and `q_minus=min(E,1-H)`.
+Within ignore pixels only, q_plus>0.5 supplies BCE target 0.7; q_minus>0.5
+supplies BCE target 0. Empty anchor sets contribute zero.
 
-Three-class K-means uses RGB and nearest-point-distance features. Point-based assignment and Voronoi refinement produce a fixed map with foreground (`clu=1`), background (`clu=0`), and an ignore band (`clu=2`). The map is generated once and is not updated during training.
+## Objective and decoder
 
-### Divergence-Sink Flow
+See [Training](TRAINING.md) for all seven loss weights. The foreground loss
+uses coarse labels outside ignore; the point loss uses retained points only.
+Centerness fits the max-Gaussian target with center-weighted MSE (gamma=2).
 
-The potential head predicts a scalar field `phi`; central differences produce `v = -grad(phi)`. A Gaussian around the nearest annotation supplies local sink-directed flow supervision. The divergence term applies a screened-Poisson residual with `kappa=0.1 px^-1`, encouraging coherent attraction basins around points. The local flow term supplies the primary grouping signal; the divergence term regularizes basin structure.
+Inference uses foreground logits >=0, flow scale 70 and 30 Cellpose Euler steps
+with interpolation. Basins smaller than 15 pixels are discarded. Centerness
+NMS uses threshold 0.4 and minimum distance 8. Zero-seed basins are dropped,
+one-seed basins retained, and multiple-seed basins partitioned by nearest seed.
+Finally, `expand_labels(distance=1)` expands each instance with nearest-label
+conflict resolution. [Inference](INFERENCE.md) records tiling and commands.
 
-### Chromatic Anchor Regularization
+## Code map
 
-RGB inputs are converted to H&E stain concentrations and robustly normalized with per-image 1st/99th percentiles. In the cluster-map ignore band, hematoxylin-supported pixels act as soft foreground anchors and eosin-supported pixels act as background anchors. Reference thresholds are `tau+=tau-=0.5`; the positive anchor target is `alpha=0.7`.
-
-## Inference flow
-
-Full images are tiled at 224x224 with 64-pixel overlap. Predictions are stitched with cosine blending and averaged over identity, horizontal-flip, and vertical-flip views. Foreground logits supply candidate pixels, predicted flow transports pixels toward sinks, and centerness peaks filter or divide ambiguous basins. Components smaller than 15 pixels are removed.
-
-## Paper-to-code map
-
-| Concept | Canonical implementation |
+| Concept | Implementation |
 |---|---|
-| ResNet-34 U-Net and potential-to-flow conversion | `chromaflow/model.py` |
-| Static point/cluster targets and augmentation | `chromaflow/dataset.py` |
-| DSF, CAR, foreground, point, and centerness losses | `chromaflow/losses.py` |
-| Optimization and checkpoint selection | `chromaflow/train.py` |
-| Tiled inference, metrics, and instance decoding | `chromaflow/eval.py` |
-| S4 seed-anchored decoding and TTA variants | `chromaflow/decode_variants.py` |
-| Static stain-aware label preparation | `chromaflow/prep_sav_clu.py` |
+| Fixed original-image sampling and weak target preparation | `chromaflow/prepare.py` |
+| Patient/WSI membership validation | `chromaflow/protocol.py` |
+| Joint cropping and augmentation | `chromaflow/dataset.py` |
+| Network and negative potential gradient | `chromaflow/model.py` |
+| DSF, CAR and training objective | `chromaflow/losses.py` |
+| Optimization and source-validation selection | `chromaflow/train.py` |
+| Full-image inference and evaluation | `chromaflow/eval.py` |
+| Seed refinement and decoder variants | `chromaflow/decode_variants.py` |
 
-The repository retains additional research variants for completeness, but they are not part of the canonical ChromaFlow path described above.
+Other architectures/losses remain explicit research variants. Canonical commands
+select the manuscript's ResNet-34 potential-head configuration.

@@ -31,7 +31,7 @@ from chromaflow.uni_encoder_hybrid import (
 from chromaflow.dinov2_encoder import NISFlowNetDINOv2
 
 
-SNAPSHOT_FILES = ["model.py", "losses.py", "dataset.py", "train.py", "eval.py", "sam_pseudo.py"]
+SNAPSHOT_FILES = ["model.py", "losses.py", "dataset.py", "train.py", "eval.py", "prepare.py", "protocol.py", "decode_variants.py", "tta.py"]
 
 
 class Tee:
@@ -87,7 +87,7 @@ def snapshot_code(root: Path, run_dir: Path) -> None:
     snapshot_dir = run_dir / "code_snapshot"
     snapshot_dir.mkdir(parents=True, exist_ok=True)
     for name in SNAPSHOT_FILES:
-        path = root / name
+        path = Path(__file__).resolve().parent / name
         if path.exists():
             shutil.copy2(path, snapshot_dir / name)
 
@@ -127,7 +127,7 @@ def load_model_state(path: Path, model: torch.nn.Module, device: torch.device) -
 
 
 def append_handoff(root: Path, run_dir: Path, config: dict[str, Any], summaries: dict[str, Any]) -> None:
-    path = root / "docs/EXPERIMENT_HANDOFF.md"
+    path = run_dir / "EXPERIMENT_HANDOFF.md"
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     if config.get("lambda_div", 0.0) != 0.0:
         method = config["method"]
@@ -572,15 +572,15 @@ def write_val_instance_metrics(path: Path, rows: list[dict[str, Any]]) -> None:
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=str(Path(__file__).resolve().parents[1]))
-    parser.add_argument("--dataset", choices=["MO", "CPM"], required=True)
+    parser.add_argument("--dataset", choices=["MO", "CPM", "CONIC", "NUINSSEG"], required=True)
     parser.add_argument("--sags-snap-window", type=int, default=0,
                         help="D9 SAGS: window radius for snapping clicks to local H peaks (0=off).")
     parser.add_argument("--clu-subdir", default="labels_clu",
-                        help="Subdirectory under ratio2.0/ for cluster labels. Use labels_clu_sav for D6.")
+                        help="Cluster-label subdirectory; labels_clu is the manuscript path. Other folders are exploratory variants.")
     parser.add_argument("--method", default="v3")
     parser.add_argument("--exp-id", default="")
     parser.add_argument("--out-dir", default="")
-    parser.add_argument("--epochs", type=int, default=300)
+    parser.add_argument("--epochs", type=int, default=150)
     parser.add_argument("--batch-size", type=int, default=16)
     parser.add_argument("--lr", type=float, default=1e-4)
     parser.add_argument("--weight-decay", type=float, default=3e-4)
@@ -588,8 +588,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--lambda-fg", type=float, default=1.0)
     parser.add_argument("--lambda-flow", type=float, default=2.0)
-    parser.add_argument("--lambda-point", type=float, default=0.5)
-    parser.add_argument("--flow-param", choices=["direct", "potential", "poisson"], default="direct")
+    parser.add_argument("--lambda-point", type=float, default=2.0)
+    parser.add_argument("--flow-param", choices=["direct", "potential", "poisson"], default="potential")
     parser.add_argument("--encoder", choices=[
         "resnet34", "resnet18", "resnet50", "resnet101", "sacaf", "r34dual", "latef", "uni", "uni_hybrid", "uni_hybrid_ln", "uni_hybrid_iga",
         "uni_hybrid_h", "uni_hybrid_h_psc2f", "uni_hybrid_h_psic", "uni_hybrid_h_mta",
@@ -597,9 +597,9 @@ def parse_args() -> argparse.Namespace:
         "uni_hybrid_h_udar", "uni_hybrid_h_urcf", "uni_hybrid_h_urcf_v2", "uni_hybrid_h_lora", "uni_hybrid_h_lora_adapter", "uni_hybrid_h_lora_hca", "uni_hybrid_h_lora_hca_mask", "uni_hybrid_h_lora_hca_v2", "uni_hybrid_h_lora_srma", "uni_hybrid_h_lora_hca_hv", "uni_hybrid_h_lora_sdca", "uni_hybrid_h_lora_hca_r34rgb", "uni_hybrid_h_lora_adasca", "uni_hybrid_h_lora_stainrecon", "uni_hybrid_h_lora_evuc", "uni_hybrid_h_lora_film", "uni_hybrid_h_lora_paa", "uni_hybrid_h_lora_msg", "mssp", "dinov2", "scde",
     ], default="resnet34")
     parser.add_argument("--uni-path", default="weights/uni/UNI/pytorch_model.bin")
-    parser.add_argument("--lambda-div", type=float, default=0.0)
+    parser.add_argument("--lambda-div", type=float, default=0.5)
     parser.add_argument("--div-conductance", choices=["constant", "stain", "eosin"], default="constant")
-    parser.add_argument("--screen-kappa", type=float, default=0.0,
+    parser.add_argument("--screen-kappa", type=float, default=0.1,
                         help="U1 screened-Poisson: (Delta-kappa^2)phi=-rho; residual += kappa^2*phi. Needs flow_param=potential. 0=plain Poisson.")
     parser.add_argument("--sink-sigma", type=float, default=3.0,
                          help="L_div: fixed sink sigma (used when --no-sink-adaptive)")
@@ -612,7 +612,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--sink-max", type=float, default=8.0,
                          help="L_div: adaptive sink maximum sigma")
     parser.add_argument("--stain-alpha", type=float, default=0.1)
-    parser.add_argument("--lambda-center", type=float, default=0.0)
+    parser.add_argument("--lambda-center", type=float, default=0.75)
     parser.add_argument("--center-sigma", type=float, default=3.0)
     parser.add_argument("--lambda-aff", type=float, default=0.0)
     parser.add_argument("--lambda-mask", type=float, default=0.0,
@@ -632,7 +632,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--stain-flow-adapt-alpha", type=float, default=0.6)
     parser.add_argument("--stain-flow-r-min", type=int, default=8)
     parser.add_argument("--stain-flow-r-max", type=int, default=30)
-    parser.add_argument("--lambda-stain-soft", type=float, default=0.0,
+    parser.add_argument("--lambda-stain-soft", type=float, default=1.0,
                         help="B9 SCR-soft: soft fg supervision in clu==2 high-H zone.")
     parser.add_argument("--stain-soft-alpha", type=float, default=0.7,
                         help="B9 soft fg target value (0-1).")
@@ -701,7 +701,7 @@ def parse_args() -> argparse.Namespace:
                         help="B18 SCMP per-pixel weight floor in [0,1]. 1.0=uniform (B17), 0.0=pure |diff| weight.")
     parser.add_argument("--stain-soft-h-thresh", type=float, default=0.5,
                         help="B9 norm(stain_h) threshold for soft-supervised pixels.")
-    parser.add_argument("--lambda-eosin-neg", type=float, default=0.0,
+    parser.add_argument("--lambda-eosin-neg", type=float, default=0.5,
                         help="B12 MPS-negative: eosin-anchored hard-bg loss in clu==2 high-E low-H zone.")
     parser.add_argument("--eosin-neg-tau-e", type=float, default=0.5,
                         help="B12 norm(stain_e) threshold (above qualifies as cytoplasm).")
@@ -1029,22 +1029,23 @@ def parse_args() -> argparse.Namespace:
                         help="Scale-perturbation std for HED jitter (default 0.05).")
     parser.add_argument("--stain-aug-bias", type=float, default=0.05,
                         help="Bias-perturbation std for HED jitter (default 0.05).")
+    parser.add_argument("--point-subset-seed", type=int, default=0, help="Fixed original-image point-selection seed recorded by preprocessing")
     parser.add_argument("--point-ratio", type=float, default=1.0,
                         help="Fraction of points to keep (1.0=all). For annotation efficiency analysis.")
     parser.add_argument("--point-shift", type=int, default=0,
                         help="Max random shift per point in pixels (0=off). For robustness analysis.")
-    parser.add_argument("--scale-jitter", action=argparse.BooleanOptionalAction, default=False,
+    parser.add_argument("--scale-jitter", action=argparse.BooleanOptionalAction, default=True,
                         help="Augment: rescale crop content to synthesize varied nucleus sizes (cross-domain scale robustness).")
-    parser.add_argument("--scale-jitter-min", type=float, default=0.5)
-    parser.add_argument("--scale-jitter-max", type=float, default=1.3)
+    parser.add_argument("--scale-jitter-min", type=float, default=0.8)
+    parser.add_argument("--scale-jitter-max", type=float, default=1.25)
     parser.add_argument("--use-sam-pseudo", type=str2bool, nargs="?", const=True, default=False)
     parser.add_argument("--sam-pseudo-path", default="")
     parser.add_argument("--stage2-pseudo-dir", default="",
                         help="Stage-2 self-train: dir with pseudo .npz files overriding instance_id field")
     parser.add_argument("--init-from", default="",
                         help="Stage-2 warm-start: path to stage-1 .pth ckpt (model_state will be loaded with strict=False)")
-    parser.add_argument("--ckpt-split", choices=["val", "test"], default="test",
-                        help="split used for best-ckpt selection. Default 'test' since MO val=6 and CPM val=8 are too small.")
+    parser.add_argument("--ckpt-split", choices=["val"], default="val",
+                        help="Split used for best-checkpoint selection (default: val).")
     parser.add_argument("--input-mode", choices=["rgb", "h_repeat", "h_and_rgb", "he_rgb"], default="rgb",
                         help="rgb=3ch RGB; h_repeat=H replicated to 3ch; h_and_rgb=dual-input H-3ch + RGB-3ch; he_rgb=5ch [R,G,B,H,E].")
     parser.add_argument("--lambda-sam-fg", type=float, default=0.0)
@@ -1074,7 +1075,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit-train-batches", type=int, default=0)
     parser.add_argument("--limit-eval-images", type=int, default=0)
     parser.add_argument("--log-freq", type=int, default=25)
-    parser.add_argument("--append-handoff", action=argparse.BooleanOptionalAction, default=True)
+    parser.add_argument("--append-handoff", action=argparse.BooleanOptionalAction, default=False)
     return parser.parse_args()
 
 
@@ -1179,7 +1180,7 @@ def main() -> None:
     config["checkpoint_selection"] = {
         "metric": "val_AJI",
         "source": "full_image_instance_inference",
-        "postprocess": "v3_cellpose_dynamics",
+        "postprocess": "S4_drop",
         "uses_train_loss": False,
         "uses_val_loss": False,
         "uses_val_fg_acc": False,
@@ -1203,11 +1204,14 @@ def main() -> None:
         stain_aug_bias=args.stain_aug_bias,
         point_ratio=args.point_ratio,
         point_shift=args.point_shift,
-        point_subset_seed=args.seed,
+        point_subset_seed=args.point_subset_seed,
         scale_jitter=args.scale_jitter,
         scale_jitter_min=args.scale_jitter_min,
         scale_jitter_max=args.scale_jitter_max,
     )
+    shutil.copy2(root / "data/official_clean/ours_prepared" / args.dataset / "preparation.json", run_dir / "preparation.json")
+    from chromaflow.protocol import split_path
+    shutil.copy2(split_path(root, args.dataset), run_dir / "split_manifest.json")
     train_loader = DataLoader(
         train_set,
         batch_size=args.batch_size,
@@ -1521,9 +1525,9 @@ def main() -> None:
         print(f"[setup] optimizer: base={len(base_params)} "
               f"+ no-WD={len(no_wd_params)} (WD=0.0) "
               f"+ high-WD={len(high_wd_params)} (WD={high_wd_value})", flush=True)
-        optimizer = torch.optim.Adam(groups, betas=(0.9, 0.99))
+        optimizer = torch.optim.Adam(groups, betas=(0.9, 0.999))
     else:
-        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay, betas=(0.9, 0.99))
+        optimizer = torch.optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay, betas=(0.9, 0.999))
     scaler = torch.amp.GradScaler("cuda", enabled=args.amp and device.type == "cuda")
     # EMA (optional): per-epoch shadow of trainable params for smoother inference.
     if args.ema_decay > 0:
@@ -1541,15 +1545,13 @@ def main() -> None:
             optimizer, T_max=args.epochs, eta_min=eta_min)
         print(f"[setup] cosine LR schedule: {args.lr} -> {eta_min} over {args.epochs} epochs", flush=True)
 
-    # ckpt-selection: configurable split (val|test). User decision 2026-05-17: use test by default
-    # because MO val=6 imgs / CPM val=8 imgs are too small for reliable model selection.
-    # paper main table will disclose this protocol deviation.
+    # Checkpoint selection is configurable for legacy runs, but the canonical
+    # protocol uses the disjoint validation split.
     ckpt_split = str(args.ckpt_split)
     if ckpt_split == "test":
         print(
-            "[warning] --ckpt-split=test selects best ckpt by test AJI (legacy C-series "
-            "behaviour). E series should pass --ckpt-split val for methodologically clean "
-            "model selection.",
+            "[warning] --ckpt-split=test selects the checkpoint by test AJI. "
+            "Use --ckpt-split=val for the canonical protocol.",
             flush=True,
         )
     best_metric = -float("inf")

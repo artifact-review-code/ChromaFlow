@@ -234,7 +234,7 @@ def decode_S4(fg_logits, flow, center_logits, cfg, drop_zero_peak: bool = False)
     masks_S0 = decode_S0(fg_logits, flow, center_logits, cfg)
     peaks = nms_peaks(center_logits, cfg["seed_threshold"], cfg["seed_min_distance"])
     if len(peaks) == 0:
-        return masks_S0
+        return np.zeros_like(masks_S0) if drop_zero_peak else masks_S0
     labels = masks_S0.astype(np.int64)
     peak_cc = labels[peaks[:, 0], peaks[:, 1]]
     cc_peak_idx: dict[int, list[int]] = {}
@@ -474,9 +474,9 @@ def parse_args():
     p.add_argument("--split", nargs="+", default=["val"])
     p.add_argument("--checkpoint", required=True)
     p.add_argument("--out-dir", required=True)
-    p.add_argument("--tta", type=str, default="",
+    p.add_argument("--tta", type=str, default="hflip,vflip",
                    help="TTA modes, comma-separated: hflip,vflip,hvflip. Empty disables.")
-    p.add_argument("--variants", nargs="+", default=["S0", "S4_drop", "S4_keep", "S1", "S2", "S3"])
+    p.add_argument("--variants", nargs="+", default=["S4_drop"])
     p.add_argument("--seed-threshold", type=float, default=0.4)
     p.add_argument("--seed-min-distance", type=int, default=8)
     p.add_argument("--center-match-radius", type=float, default=8.0)
@@ -535,7 +535,7 @@ def parse_args():
                    help="Test-time input upsampling factor (2.0 = 2x). Pred resized back to GT res (nearest) before metrics; AJI is scale-invariant.")
     # Post-process: expand each instance label by N pixels (distance-bounded,
     # safe against merging with neighbor instances). Targets SQ gap.
-    p.add_argument("--mask-dilation", type=int, default=0,
+    p.add_argument("--mask-dilation", type=int, default=1,
                    help="Per-instance label expansion radius in pixels. 0=off.")
     p.add_argument("--mask-smooth", type=int, default=0,
                    help="Per-instance fill_holes + binary_closing(disk(N)) radius. 0=off.")

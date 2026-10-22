@@ -16,6 +16,7 @@ python -m chromaflow.eval \
   --tile-size 224 \
   --tile-overlap 64 \
   --tile-batch-size 16 \
+  --postprocess paper --tta hflip,vflip \
   --cellprob-mode logits \
   --cellprob-threshold 0.0 \
   --flow-threshold 0.0 \

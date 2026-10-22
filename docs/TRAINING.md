@@ -1,85 +1,63 @@
 # Training protocol
 
-This page records the canonical configuration used for the paper. It intentionally exposes the steps and principal hyperparameters needed to understand and reproduce the training protocol without publishing every exploratory script from the research workspace.
-
-## Canonical configuration
-
-| Item | Setting |
+| Item | Canonical setting |
 |---|---|
-| Network | ResNet-34 U-Net with foreground, centerness, and scalar-potential heads |
-| Input crop | 224 x 224 RGB |
-| Prepared samples | 1176 patches per source-domain run |
+| Network | ImageNet-pretrained ResNet-34 U-Net, three 1x1 heads |
+| Prepared patch / random crop | 250x250 / 224x224 |
 | Epochs / batch size | 150 / 16 |
-| Optimizer | Adam, betas `(0.9, 0.99)`, epsilon `1e-8` |
-| Learning rate | `1e-4`, constant |
-| Weight decay | `3e-4` |
-| Validation | every 10 epochs |
-| Selection rule | highest validation AJI; test data are never used for selection |
-| Repetitions | seeds 0, 1, and 2 |
-| Inference | 224 tile, 64 overlap, cosine blend, identity/hflip/vflip TTA |
+| Optimizer | Adam, betas (0.9, 0.999), epsilon 1e-8 |
+| Learning rate / weight decay | fixed 1e-4 / 3e-4 |
+| Validation / checkpoint | every 10 epochs / best source-validation AJI |
+| Repetition seeds | 0, 1, 2 |
+| Decoder | flow scale 70, 30 steps, area 15, NMS 0.4/8, S4_drop, expansion 1 |
 
-The loss is
+The objective is
 
-`L = 1.0 L_fg + 2.0 L_flow + 0.5 L_point + 0.75 L_div + 1.0 L_center + 0.5 L_H + 0.5 L_E`.
+`L = L_fg + 2 L_flow + 2 L_point + 0.5 L_div + 0.75 L_center + L_H + 0.5 L_E`.
 
-DSF uses `kappa=0.1 px^-1` and Gaussian scales `sigma_s=sigma_c=3`. CAR uses `tau+=tau-=0.5` and a positive soft target `alpha=0.7`.
+`L_fg` has unit weight. The CLI retains `--lambda-fg` for controlled ablations.
+The code names `lambda_center`, `lambda_stain_soft`, and `lambda_eosin_neg`
+correspond to manuscript lambda_ctr, lambda_H, and lambda_E.
+DSF uses kappa=0.1 and max-Gaussian source/centerness scales of 3 pixels.
+CAR thresholds are 0.5, with foreground target 0.7 and background target 0.
 
-## Label preparation
+All datasets use flips, right-angle rotations and scale jitter [0.8,1.25].
+HED augmentation is off for the main method; `--stain-aug` enables the separate
+HED augmentation control. The range and probability of scale jitter are explicit
+implementation settings retained from the existing code (probability 0.5).
+No early stopping or learning-rate schedule is used in the canonical command.
 
-Only one interior point per nucleus is used as manual supervision. The preprocessing stage combines RGB and nearest-point-distance features with three-class K-means, assigns candidate regions to points with Voronoi cells, and protects a two-pixel disk around every point. It writes a static foreground/background/ignore cluster map consumed by the dataset loader.
+## Prepare and train
+
+First provide final, patient-disjoint manifests as in [Datasets](DATASETS.md),
+then prepare targets as in [Data format](DATA_FORMAT.md).
 
 ```bash
-bash scripts/prepare_sav_labels.sh /path/to/project_or_data_root MO
-bash scripts/prepare_sav_labels.sh /path/to/project_or_data_root CPM
+bash scripts/prepare_labels.sh DATA_ROOT MO 1.0 0
+bash scripts/train_canonical.sh DATA_ROOT MO 0 1.0 0
+# Other datasets use the same settings:
+bash scripts/train_canonical.sh DATA_ROOT CPM 0 1.0 0
+bash scripts/train_canonical.sh DATA_ROOT CONIC 0 1.0 0
+bash scripts/train_canonical.sh DATA_ROOT NUINSSEG 0 1.0 0
 ```
 
-The expected folders and NPZ fields are documented in [Data format](DATA_FORMAT.md). Inspect a few generated maps before starting a long run; point disks must coincide with nuclei and instance IDs must remain intact.
+The YAML is a reference specification; the shell wrapper explicitly passes the
+training arguments. Validation uses the same seed-refined decoder and flip TTA
+as final evaluation. Test membership is read only for final evaluation.
 
-## Augmentation
-
-All runs use horizontal and vertical flips and 90-degree rotations. HED augmentation perturbs stain concentrations during training. MoNuSeg additionally uses scale jitter in `[0.8, 1.25]` to reduce the magnification mismatch with CPM-17. Augmentation is applied only to training samples.
-
-## Train one seed
+## Fixed 5% point experiment
 
 ```bash
-# MoNuSeg: includes the paper's scale jitter
-bash scripts/train_canonical_mo.sh /path/to/project_or_data_root 0
-
-# CPM-17
-bash scripts/train_canonical_cpm.sh /path/to/project_or_data_root 0
-```
-
-The shell wrappers expose the exact main arguments while keeping the Python entry point available for controlled changes:
-
-```bash
-python -m chromaflow.train --help
-```
-
-## Run the three paper seeds
-
-```bash
+bash scripts/prepare_labels.sh SPARSE_DATA_ROOT CPM 0.05 0
 for seed in 0 1 2; do
-  bash scripts/train_canonical_mo.sh /path/to/project_or_data_root "$seed"
-done
-
-for seed in 0 1 2; do
-  bash scripts/train_canonical_cpm.sh /path/to/project_or_data_root "$seed"
+  bash scripts/train_canonical.sh SPARSE_DATA_ROOT CPM "$seed" 0.05 0
 done
 ```
 
-Each run validates every ten epochs and stores the checkpoint with the highest source-validation AJI. Do not choose a checkpoint or decoding threshold using the target test set.
-
-## Evaluate the selected checkpoint
-
-```bash
-bash scripts/evaluate.sh \
-  /path/to/project_or_data_root MO test \
-  /path/to/best_val_aji.pth runs/eval_MO_test
-
-# Paper decoding variant with flip TTA
-bash scripts/decode_variants.sh \
-  /path/to/project_or_data_root MO test \
-  /path/to/best_val_aji.pth runs/decode_MO_test
-```
-
-The anonymous release does not contain checkpoints or private server paths. The detailed experimental orchestration and exploratory hyperparameter scripts will be added after acceptance; the optimizer, losses, data preparation, model selection, and evaluation code used by the canonical path are already present.
+For each original training image, uniformly select `round(0.05*N)` points
+without replacement (round-half-up, minimum one if N>0). Selection occurs once
+before patch extraction and remains fixed across epochs and the shown training
+seeds. Change the separate point-selection seed only when intentionally preparing
+another point subset. Rebuild coarse labels, Voronoi flow and Gaussian targets
+using retained points; there is no mask-based exclusion around discarded nuclei.
+Selected coordinates are saved for auditing in `preparation.json`.

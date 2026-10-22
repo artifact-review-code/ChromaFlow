@@ -11,17 +11,18 @@ ChromaFlow/
 │   ├── train.py              # optimization and validation selection
 │   ├── eval.py               # tiled inference, decoding, and metrics
 │   ├── decode_variants.py    # S4 decoding and flip TTA
-│   ├── prep_sav_clu.py       # static K-means/Voronoi label generation
+│   ├── prepare.py            # original-image point sampling and K-means/Voronoi targets
+│   ├── protocol.py           # patient/WSI split validation
+│   ├── prep_sav_clu.py       # legacy stain-geodesic experiment
 │   ├── tta.py                # test-time transforms
 │   └── *_loss.py, uni_*.py   # optional research variants
 ├── configs/                  # canonical training and inference settings
 ├── scripts/                  # public entry points; train_canonical_*.sh is the paper path
 ├── docs/                     # reviewer documentation
-├── splits/                   # exact experiment memberships
+├── splits/                   # verified MoNuSeg membership; other final manifests supplied externally
 ├── results/                  # machine-readable paper tables
 ├── assets/
-│   ├── demo/                 # four input/prediction/overlay examples
-│   └── paper/                # paper figures and table preview
+│   └── paper/                # current paper figures
 └── tools/                    # release validation and table synchronization
 ```
 

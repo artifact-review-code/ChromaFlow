@@ -1,11 +1,24 @@
-# Implementation Details
+# Implementation details
 
-Default experiments use a ResNet-34 U-Net style encoder-decoder with foreground, centerness, and flow heads. RGB inputs are converted from uint8 to `[0, 1]` and normalized with ImageNet mean/std. Hematoxylin/eosin channels are computed with `skimage.color.rgb2hed` and robustly normalized per image using 1/99 percentiles.
+The canonical protocol is documented in [Training](TRAINING.md),
+[Data format](DATA_FORMAT.md), [Datasets](DATASETS.md) and [Method](METHOD.md).
+The code was aligned to the 2026-10-21 manuscript. See
+[Alignment record](MANUSCRIPT_ALIGNMENT.md) for changes and data requirements.
 
-Models are trained for 150 epochs with Adam, learning rate `1e-4`, weight decay `3e-4`, betas `(0.9, 0.99)`, default epsilon `1e-8`, and a constant learning rate. No LR warmup or early stopping is used in the default scripts.
+RGB is scaled to [0,1] and ImageNet-normalized for the network. Stain channels
+are extracted from RGB with the fixed Ruifrok-Johnston HED matrix (`rgb2hed`),
+normalized with 1st/99th percentiles and epsilon=1e-6 over all prepared-image
+pixels, then min-max normalized over the current augmented crop inside CAR.
+Degenerate percentile ranges yield zero channels. Spatial derivatives use
+centered interior differences and one-sided boundary differences.
 
-The final checkpoint is selected by best AJI on the validation split, evaluated every 10 epochs. The released scripts explicitly pass `--ckpt-split val`.
+The point-derived Gaussian source and centerness target are prepared before
+cropping, retaining the contribution of points just outside a crop. The center
+loss is `mean((1+2*target)*(sigmoid(logits)-target)**2)`. Point loss is zero for
+an empty point set. Flow is dx,dy in training, swapped to dy,dx for Cellpose.
+Targets use the fixed displacement denominator 250 even on 224x224 crops.
+Uniform scale augmentation rescales displacement magnitude with spatial scale.
 
-Training uses prepared 224x224 patches. Each epoch iterates over all prepared training patches with dataloader shuffling. Geometric augmentation includes random horizontal/vertical flips and random 90-degree rotations; optional HED stain augmentation is enabled in the default scripts.
-
-Runtime and FLOP measurements should state the input size, batch size, hardware, whether preprocessing and Cellpose-style decoding are included, and whether CUDA synchronization and warmup iterations were used.
+The public result CSVs are manuscript transcriptions, not outputs from running
+this edited code. The `tools/sync_results.py ... --check` command checks that
+transcription. New runs write their own evaluation results separately.

@@ -132,12 +132,12 @@ def gaussian_point_density(
     mode: str = "sum",
 ) -> torch.Tensor:
     """Gaussian density from sparse points.
-    mode="sum"  (default, legacy behavior): rho(x) = sum_i exp(-||x-p_i||^2/(2 sigma^2)).
-                Convolution-based; peaks of touching points sum > 1 in the saddle.
-                Preferred for L_center heatmap regression (wide NMS-friendly lobes).
-    mode="max"  (PDE-correct): rho(x) = exp(-d_min^2/(2 sigma^2)) using nearest-point only.
-                Peak = 1 everywhere, saddle stays low.
-                Preferred for L_div divergence-sink supervision (no saddle saturation).
+    mode="sum"  (legacy behavior): rho(x) = sum_i exp(-||x-p_i||^2/(2 sigma^2)).
+                Convolution-based; overlapping targets can exceed 1. Retained
+                for backward compatibility.
+    mode="max": rho(x) = exp(-d_min^2/(2 sigma^2)) using the nearest point.
+                The target remains in [0, 1] and is used by both L_div and the
+                centerness regression in the canonical ChromaFlow objective.
     Returns (B, 1, H, W).
     """
     if point_map.ndim == 3:
@@ -367,11 +367,12 @@ def divergence_sink_loss(
     sink_max: float = 8.0,
     phi: torch.Tensor | None = None,
     screen_kappa: float = 0.0,
+    source_density: torch.Tensor | None = None,
 ) -> torch.Tensor:
     """Point-sink divergence loss.
 
     Screened-Poisson (U1): if phi is given and screen_kappa>0, the constraint
-    becomes (Delta - kappa^2) phi = -rho_sink, i.e. residual = div(flow) +
+    becomes (Delta - kappa^2) phi = rho_sink, i.e. residual = div(flow) +
     rho_sink + kappa^2 * phi. This adds a length scale 1/kappa (~nucleus radius)
     so a point's flow influence decays (Yukawa kernel) instead of smearing across
     the tile (plain Poisson, log-kernel) — a locality prior direct flow cannot express.
@@ -389,7 +390,11 @@ def divergence_sink_loss(
         if conductance.ndim == 3:
             conductance = conductance.unsqueeze(1)
         flow = flow * conductance.to(dtype=flow.dtype)
-    if sink_adaptive:
+    if source_density is not None and not sink_adaptive:
+        rho_sink = source_density.to(dtype=flow.dtype)
+        if rho_sink.ndim == 3:
+            rho_sink = rho_sink.unsqueeze(1)
+    elif sink_adaptive:
         rho_sink = adaptive_max_sink(point_map, alpha=sink_alpha,
                                        sigma_min=sink_min, sigma_max=sink_max
                                        ).to(dtype=flow.dtype)
@@ -2158,19 +2163,19 @@ def compute_losses(
     batch: dict[str, torch.Tensor],
     lambda_fg: float = 1.0,
     lambda_flow: float = 2.0,
-    lambda_point: float = 0.5,
+    lambda_point: float = 2.0,
     lambda_sam_fg: float = 0.0,
     lambda_sam_flow: float = 0.0,
-    lambda_div: float = 0.0,
+    lambda_div: float = 0.5,
     div_conductance: str = "constant",
-    screen_kappa: float = 0.0,
+    screen_kappa: float = 0.1,
     sink_sigma: float = 3.0,
     sink_adaptive: bool = False,
     sink_alpha: float = 0.25,
     sink_min: float = 3.0,
     sink_max: float = 8.0,
     stain_alpha: float = 0.1,
-    lambda_center: float = 0.0,
+    lambda_center: float = 0.75,
     center_sigma: float = 3.0,
     lambda_aff: float = 0.0,
     aff_radius: float = 5.0,
@@ -2195,7 +2200,7 @@ def compute_losses(
     lambda_stain_dice: float = 0.0,
     stain_dice_alpha: float = 0.5,
     # B9 SCR-soft (stain-anchored soft fg label in BoNuS ignore zone clu==2)
-    lambda_stain_soft: float = 0.0,
+    lambda_stain_soft: float = 1.0,
     stain_soft_alpha: float = 0.7,
     stain_soft_h_thresh: float = 0.5,
     # B13 proximity gate: only supervise ignore-zone pixels within max_dist of any GT point.
@@ -2223,7 +2228,7 @@ def compute_losses(
     stain_flow_adapt_alpha: float = 0.6,
     stain_flow_r_min: int = 8,
     stain_flow_r_max: int = 30,
-    lambda_eosin_neg: float = 0.0,
+    lambda_eosin_neg: float = 0.5,
     eosin_neg_tau_e: float = 0.5,
     eosin_neg_tau_h: float = 0.5,
     eosin_neg_max_dist: int = 0,
@@ -2447,7 +2452,7 @@ def compute_losses(
 
     flow_target = batch["offset"].to(dtype=flow_pred.dtype)
     basin_valid = batch["basin_valid"].to(dtype=flow_pred.dtype).unsqueeze(1)
-    flow_mask = basin_valid * (clu == 1).to(dtype=flow_pred.dtype).unsqueeze(1)
+    flow_mask = (clu == 1).to(dtype=flow_pred.dtype).unsqueeze(1)
 
     if scs_w is not None:
         # L_fg: apply SCS weight only on clu==1 pixels; clu==0 forced-bg keeps w=1.
@@ -2526,12 +2531,16 @@ def compute_losses(
             sink_max=sink_max,
             phi=outputs.get("phi"),
             screen_kappa=screen_kappa,
+            source_density=batch.get("rho"),
         )
         total = total + lambda_div * loss_div
 
     loss_center = fg_logits.new_tensor(0.0)
     if lambda_center != 0.0 and "centerness_logits" in outputs:
-        center_target = gaussian_point_density(batch["point_map"], center_sigma).to(dtype=fg_logits.dtype)
+        center_target = batch.get("center_target")
+        if center_target is None:
+            center_target = gaussian_point_density(batch["point_map"], center_sigma, mode="max")
+        center_target = center_target.to(dtype=fg_logits.dtype)
         loss_center = focal_mse_loss(outputs["centerness_logits"], center_target, gamma=2.0)
         total = total + lambda_center * loss_center
 

@@ -28,3 +28,7 @@ paper_tables/
 *.jpg
 *.jpeg
 *.svs
+
+# Publication assets belong to the release (datasets remain ignored).
+!assets/paper/*.png
+.pytest_cache/

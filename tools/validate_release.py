@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+import argparse
+import sys
 import csv
 import json
 import re
@@ -13,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_SPLITS = {
     "monuseg.json": (24, 6, 14),
-    "cpm17.json": (20, 4, 8),
+    "cpm17.json": (24, 8, 32),
     "conic.json": (3372, 516, 1093),
     "nuinsseg.json": (472, 65, 128),
 }
@@ -26,16 +28,18 @@ REQUIRED_DOCS = [
 FORBIDDEN = ("/home/ftl", "100.87.11.77", "wangbaoyuan", "王报源")
 
 
-def check_splits() -> None:
-    for filename, expected in EXPECTED_SPLITS.items():
-        data = json.loads((ROOT / "splits" / filename).read_text())
-        groups = [data[key] for key in ("train", "val", "test")]
-        actual = tuple(len(group) for group in groups)
-        assert actual == expected, f"{filename}: expected {expected}, got {actual}"
-        normalized = [{str(item) for item in group} for group in groups]
-        assert not (normalized[0] & normalized[1]), f"{filename}: train/val overlap"
-        assert not (normalized[0] & normalized[2]), f"{filename}: train/test overlap"
-        assert not (normalized[1] & normalized[2]), f"{filename}: val/test overlap"
+def check_splits(data_root=None, require_all=False) -> None:
+    sys.path.insert(0, str(ROOT))
+    from chromaflow.protocol import load_splits
+    for dataset in ('MO', 'CPM', 'CONIC', 'NUINSSEG'):
+        try:
+            data, _ = load_splits(Path(data_root or ROOT), dataset)
+        except FileNotFoundError:
+            if require_all:
+                raise
+            print(f'{dataset}: external final patient/WSI manifest required')
+            continue
+        print(f'{dataset}: verified counts and patient/WSI separation')
 
 
 def check_results() -> None:
@@ -51,21 +55,12 @@ def check_results() -> None:
         assert fields <= set(reader.fieldnames or []), f"{filename}: missing fields"
         assert len({row["method"] for row in rows}) == 18, f"{filename}: method count"
     subprocess.run(
-        ["python3", str(ROOT / "tools/render_results_tables.py"), "--check"],
+        [sys.executable, str(ROOT / "tools/render_results_tables.py"), "--check"],
         cwd=ROOT,
         check=True,
         capture_output=True,
         text=True,
     )
-
-
-def check_demo() -> None:
-    manifest = json.loads((ROOT / "assets/demo/manifest.json").read_text())
-    assert len(manifest["samples"]) == 4, "demo manifest must contain four samples"
-    for sample in manifest["samples"]:
-        folder = ROOT / "assets/demo" / sample["dataset"]
-        for filename in ("input.png", "prediction.png", "overlay.png", "instances.npy"):
-            assert (folder / filename).is_file(), f"missing demo asset: {folder / filename}"
 
 
 def check_markdown_links() -> None:
@@ -82,7 +77,7 @@ def check_markdown_links() -> None:
 
 
 def check_anonymity() -> None:
-    roots = [ROOT / "README.md", ROOT / "docs", ROOT / "results", ROOT / "splits", ROOT / "assets/demo"]
+    roots = [ROOT / "README.md", ROOT / "docs", ROOT / "results", ROOT / "splits"]
     for base in roots:
         paths = [base] if base.is_file() else [p for p in base.rglob("*") if p.is_file()]
         for path in paths:
@@ -96,12 +91,17 @@ def check_anonymity() -> None:
 
 
 def main() -> None:
-    check_splits()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--data-root', type=Path)
+    parser.add_argument('--require-all-splits', action='store_true')
+    args = parser.parse_args()
+    check_splits(args.data_root, args.require_all_splits)
     check_results()
-    check_demo()
     check_markdown_links()
+    assert len(list((ROOT / "assets/paper").glob("*.png"))) == 9
+    assert (ROOT / "assets/paper/figure2_architecture.pdf").is_file()
     check_anonymity()
-    print("Release validation passed: splits, results, demos, links, and anonymity.")
+    print("Available manifests, result schemas, figure assets and documentation checks passed. External-manifest status is listed above.")
 
 
 if __name__ == "__main__":

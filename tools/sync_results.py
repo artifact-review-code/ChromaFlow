@@ -11,7 +11,7 @@ CROSS_METRICS=("AJI","Dice","DQ","PQ")
 def method(cell):
     cell=re.sub(r"\\cite\{[^}]+\}","",cell)
     cell=re.sub(r"\\(?:textbf|underline)\{([^{}]+)\}",r"\1",cell).replace("~"," ").strip()
-    return "ChromaFlow" if cell=="Ours" else cell
+    return "ChromaFlow" if cell in ("Ours", "ChromaFlow (Ours)") else cell
 def value(cell):
     if "--" in cell:return ""
     m=re.findall(r"(?<![A-Za-z])\d+\.\d+",cell); return m[-1] if m else ""
@@ -20,8 +20,8 @@ def section(text,start,end):
 def rows(lines,n):
     group=""; pending=[]
     for line in lines:
-        if "Fully supervised references" in line:group="fully_supervised"
-        elif "Pretrained foundation-model references" in line:group="foundation_model"
+        if ("Fully supervised references" in line or "Fully supervised methods" in line):group="fully_supervised"
+        elif ("Pretrained foundation-model references" in line or "Pretrained foundation-model-based methods" in line):group="foundation_model"
         elif "Weakly supervised methods" in line:group="weakly_supervised"
         if not group:continue
         if pending or "&" in line:pending.append(line.strip())
@@ -32,12 +32,12 @@ def rows(lines,n):
 def output(fields,data):
     s=io.StringIO(newline=""); w=csv.DictWriter(s,fieldnames=fields,lineterminator="\n"); w.writeheader(); w.writerows(data); return s.getvalue()
 def extract(path):
-    text=path.read_text(); inside=[]; cross=[]
-    for group,name,vals in rows(section(text,r"\newcommand{\indomaintable}","\n\\indomaintable"),26):
+    text=re.sub(r"(?<!\\)%[^\n]*", "", path.read_text()); inside=[]; cross=[]
+    for group,name,vals in rows(section(text,r"\newcommand{\indomaintable}",r"\newcommand{\crossdomaintable}"),26):
         params,gflops,*metrics=vals
         for di,dataset in enumerate(DATASETS):
             for mi,metric in enumerate(IN_METRICS):inside.append(dict(group=group,method=name,params_m=params,gflops=gflops,dataset=dataset,metric=metric,value=metrics[di*6+mi]))
-    for group,name,vals in rows(section(text,r"\label{tab:cross}",r"\subsection{Point supervision"),32):
+    for group,name,vals in rows(section(text,r"\label{tab:cross}",r"\end{table*}"),32):
         for di,direction in enumerate(DIRECTIONS):
             for mi,metric in enumerate(CROSS_METRICS):cross.append(dict(group=group,method=name,direction=direction,metric=metric,value=vals[di*4+mi]))
     if not inside or not cross:raise RuntimeError("Could not find both result tables")

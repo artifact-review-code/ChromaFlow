@@ -109,7 +109,7 @@ class NISFlowNet(nn.Module):
     Cellpose dynamics.
     """
 
-    def __init__(self, pretrained: bool = True, flow_param: str = "direct",
+    def __init__(self, pretrained: bool = True, flow_param: str = "potential",
                  in_channels: int = 3, with_boundary: bool = False,
                  with_polarity: bool = False, with_pace: bool = False,
                  backbone: str = "resnet34") -> None:

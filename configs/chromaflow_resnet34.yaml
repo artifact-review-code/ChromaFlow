@@ -2,7 +2,6 @@ method: ChromaFlow
 encoder: resnet34
 input_mode: rgb
 flow_param: potential
-
 training:
   epochs: 150
   batch_size: 16
@@ -10,38 +9,47 @@ training:
   optimizer: Adam
   lr: 0.0001
   weight_decay: 0.0003
-  betas: [0.9, 0.99]
-  eps: 0.00000001
+  betas:
+  - 0.9
+  - 0.999
+  eps: 1.0e-08
   lr_schedule: constant
   early_stop: false
   eval_every: 10
   ckpt_split: val
-  seeds: [0, 1, 2]
-
+  seeds:
+  - 0
+  - 1
+  - 2
 losses:
   lambda_fg: 1.0
   lambda_flow: 2.0
-  lambda_point: 0.5
-  lambda_div: 0.75
+  lambda_point: 2.0
+  lambda_div: 0.5
   screen_kappa: 0.1
-  lambda_center: 1.0
-  lambda_stain_soft: 0.5
+  lambda_center: 0.75
+  lambda_stain_soft: 1.0
   lambda_eosin_neg: 0.5
-  lambda_spp: 0.5
-  lambda_gap: 0.5
-  lambda_msst: 0.5
-  lambda_niche: 0.3
-  lambda_idg: 0.3
-  lambda_boundary: 0.5
-  lambda_pace: 0.05
-  lambda_dhs: 1.0
-  lambda_hgfa: 1.0
-
 augmentation:
   augment: true
-  stain_aug: true
+  stain_aug: false
   stain_aug_sigma: 0.05
   stain_aug_bias: 0.05
   scale_jitter: true
   scale_jitter_min: 0.8
   scale_jitter_max: 1.25
+supervision:
+  prepared_patch_size: 250
+  flow_normalization: 250
+  source_sigma: 3.0
+  center_sigma: 3.0
+  center_gamma: 2.0
+  stain_epsilon: 1.0e-06
+  stain_percentiles:
+  - 1
+  - 99
+  positive_anchor_target: 0.7
+  positive_threshold: 0.5
+  negative_threshold: 0.5
+  point_ratio: 1.0
+  point_subset_seed: 0
